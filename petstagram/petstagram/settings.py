@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'petstagram.common',
+    'petstagram.photos',
     'petstagram.pets',
     'petstagram.accounts',
 ]

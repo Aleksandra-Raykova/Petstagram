@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.views import generic as views
 
-from petstagram.common import view_mixins
+from petstagram.photos import view_mixins
 
 
 class HomeView(view_mixins.RedirectToAllPets, views.TemplateView):

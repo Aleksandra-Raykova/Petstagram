@@ -1,5 +1,5 @@
 from django.urls import path
-from petstagram.common.views import HomeView
+from petstagram.photos.views import HomeView
 
 
 urlpatterns = [

@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from petstagram.accounts.forms import CreateProfileForm
-from petstagram.common.view_mixins import RedirectToAllPets
+from petstagram.photos.view_mixins import RedirectToAllPets
 from petstagram.accounts.models import Profile
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
