@@ -1,5 +1,6 @@
 from django.contrib import admin
-from petstagram.photos.models import Comment
+from petstagram.photos import models
 
 
-admin.site.register(Comment)
+admin.site.register(models.Comment)
+admin.site.register(models.Photo)
