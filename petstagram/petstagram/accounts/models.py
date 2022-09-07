@@ -11,19 +11,9 @@ from petstagram.accounts.managers import PetstagramUserManager
 
 
 class PetstagramUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
-    username = models.CharField(
-        max_length=25,
-        unique=True,
-    )
-
-    date_joined = models.DateTimeField(
-        auto_now_add=True,
-    )
-
-    is_staff =  models.BooleanField(
-        default=False,
-    )
-
+    username = models.CharField(max_length=25, unique=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    is_staff = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
 
     objects = PetstagramUserManager()
@@ -36,45 +26,24 @@ class Profile(models.Model):
 
     GENDERS = [(x, x) for x in (MALE, FEMALE, DO_NOT_SHOW)]
 
-    first_name = models.CharField(
-        max_length=30,
-        validators=(
-            MinLengthValidator(2),
-        )
-    )
+    email = models.EmailField(unique=True)
+    user = models.OneToOneField(to=PetstagramUser, on_delete=models.CASCADE, primary_key=True)
 
-    last_name = models.CharField(
-        max_length=30,
-        validators=(
-            MinLengthValidator(2),
-        )
-    )
+    first_name = models.CharField(max_length=30, validators=(MinLengthValidator(2),), null=True, blank=True)
+    last_name = models.CharField(max_length=30, validators=(MinLengthValidator(2),), null=True, blank=True)
+    profile_picture = models.URLField(null=True, blank=True)
+    gender = models.CharField(max_length=11, choices=GENDERS, null=True, blank=True, default=DO_NOT_SHOW)
 
-    picture = models.URLField()
+    def get_full_name(self):
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
 
-    date_of_birth = models.DateTimeField(
-        null=True,
-        blank=True,
-    )
+    def get_short_name(self):
+        return self.first_name
 
-    email = models.EmailField(
-        null=True,
-        blank=True,
-    )
-
-    gender = models.CharField(
-        max_length=max(len(x) for x, _ in GENDERS),
-        choices=GENDERS,
-        null=True,
-        blank=True,
-        default=DO_NOT_SHOW,
-    )
-
-    user = models.OneToOneField(
-        PetstagramUser,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        ...
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        user_info = '%s %s' % (self.user.username, self.get_full_name())
+        return user_info

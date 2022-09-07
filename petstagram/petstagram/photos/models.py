@@ -14,7 +14,7 @@ class Photo(models.Model):
 
 class Comment(models.Model):
     body = models.TextField(max_length=300)
-    to_photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE, relates_name='comments')
+    to_photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE)
     user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
     created_or_edited_on = models.DateTimeField(auto_now=True)
 
