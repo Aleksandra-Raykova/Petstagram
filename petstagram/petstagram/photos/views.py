@@ -1,8 +1,13 @@
-from django.shortcuts import redirect
-from django.views import generic as views
-
-from petstagram.photos import view_mixins
+from django.shortcuts import render
 
 
-class HomeView(view_mixins.RedirectToAllPets, views.TemplateView):
-    template_name = 'landing_page.html'
+def add_photo(request):
+    return render(request=request, template_name='photos/photo-add-page.html')
+
+
+def show_photo_details(request):
+    return render(request=request, template_name='photos/photo-details-page.html')
+
+
+def edit_photo(request):
+    return render(request=request, template_name='photos/photo-edit-page.html')

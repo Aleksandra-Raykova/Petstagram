@@ -9,13 +9,13 @@ def login(request):
     return render(request=request, template_name='accounts/login-page.html')
 
 
-def show_profile_details(request, username):
+def show_profile_details(request):
     return render(request=request, template_name='accounts/register-page.html')
 
 
-def edit_profile(request, username):
+def edit_profile(request):
     return render(request=request, template_name='accounts/profile-edit-page.html')
 
 
-def delete_profile(request, username):
+def delete_profile(request):
     return render(request=request, template_name='accounts/profile-delete-page.html')

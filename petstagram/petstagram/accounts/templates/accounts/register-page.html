@@ -5,7 +5,7 @@
     <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-          <form style="border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" action="{% url 'register' %}" method="post">
+          <form style="border: 1px solid grey; margin: 10% 0; padding: 10% 5%" action="{% url 'register' %}" method="post">
             <h2>Sign up</h2>
             {% csrf_token %}
             {{ form }}

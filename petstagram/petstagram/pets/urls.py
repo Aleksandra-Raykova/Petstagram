@@ -2,8 +2,7 @@ from django.urls import path
 from petstagram.pets.views import *
 
 urlpatterns = [
-    path('', AllPetsView.as_view(), name='list pets'),
-
+    path('', CreatePetView.as_view(), name='list pets'),
     path('create/', CreatePetView.as_view(), name='create pet'),
     path('edit/<int:pk>', EditPetView.as_view(), name='edit pet'),
     path('delete/<int:pk>', DeletePetView.as_view(), name='delete pet'),

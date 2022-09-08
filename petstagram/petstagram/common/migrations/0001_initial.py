@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('body', models.TextField(max_length=300)),
                 ('created_or_edited_on', models.DateTimeField(auto_now=True)),
-                ('to_photo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='photos.photo')),
+                ('to_photo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='common_templates-.photo')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.profile')),
             ],
             options={

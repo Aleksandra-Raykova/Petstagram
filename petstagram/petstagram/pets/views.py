@@ -2,8 +2,8 @@ from django.contrib.auth import mixins as auth_mixins
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.shortcuts import redirect
-from petstagram.photos.forms import CommentForm
-from petstagram.photos.forms import Comment
+from petstagram.common.forms import CommentForm
+from petstagram.common.forms import Comment
 from petstagram.pets.forms import PetForm
 from petstagram.pets.models import Pet
 

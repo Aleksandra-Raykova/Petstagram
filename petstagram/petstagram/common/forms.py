@@ -1,5 +1,5 @@
 from django import forms
-from petstagram.photos.models import Comment
+from petstagram.common.models import Comment
 
 
 class CommentForm(forms.Form):
