@@ -10,13 +10,13 @@ from petstagram.pets.models import Pet, Like
 
 class AllPetsView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Pet
-    template_name = 'pet_list.html'
+    template_name = 'pets/pet_list.html'
     context_object_name = 'pets'
 
 
 class CreatePetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     form_class = PetForm
-    template_name = 'pet_create.html'
+    template_name = 'pets/pet_create.html'
     success_url = reverse_lazy('list pets')
 
     def get_form_kwargs(self):
@@ -29,7 +29,7 @@ class EditPetView(views.UpdateView):
     model = Pet
     form_class = PetForm
     context_object_name = 'pet'
-    template_name = 'pet_edit.html'
+    template_name = 'pets/pet_edit.html'
     success_url = reverse_lazy('home')
 
     def get_form_kwargs(self):
@@ -40,13 +40,13 @@ class EditPetView(views.UpdateView):
 
 class DeletePetView(views.DeleteView):
     form_class = PetForm
-    template_name = 'pet_delete.html'
+    template_name = 'pets/pet_delete.html'
     success_url = reverse_lazy('home')
 
 
 class PetDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = Pet
-    template_name = 'pet_detail.html'
+    template_name = 'pets/pet_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
