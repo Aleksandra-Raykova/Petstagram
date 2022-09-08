@@ -3,15 +3,9 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.shortcuts import redirect
 from petstagram.photos.forms import CommentForm
-from petstagram.photos.models import Comment
+from petstagram.photos.forms import Comment
 from petstagram.pets.forms import PetForm
-from petstagram.pets.models import Pet, Like
-
-
-class AllPetsView(auth_mixins.LoginRequiredMixin, views.ListView):
-    model = Pet
-    template_name = 'pets/pet_list.html'
-    context_object_name = 'pets'
+from petstagram.pets.models import Pet
 
 
 class CreatePetView(auth_mixins.LoginRequiredMixin, views.CreateView):
@@ -60,10 +54,6 @@ class PetDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
 
 def like_pet(request, pk):
     pet = Pet.objects.get(pk=pk)
-    like = Like(
-        pet=pet,
-    )
-    like.save()
     return redirect('list pets')
 
 
