@@ -2,11 +2,7 @@ from django import forms
 from petstagram.common.models import Comment
 
 
-class CommentForm(forms.Form):
-    comment = forms.CharField(required=True, widget=forms.Textarea(attrs={
-        'class': 'form-control rounded-2'
-    }))
-
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = 'comment'
+        fields = ("body",)
