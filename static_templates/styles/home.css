@@ -255,6 +255,7 @@ main .container {
     font-weight: 500;
     margin-top: 5px;
     font-size: 14px;
+    cursor: default;
     color: #4d4d4f;
 }
 
@@ -318,6 +319,7 @@ input.text::placeholder {
 .postTime {
     margin-top: 8px;
     font-weight: lighter;
+    cursor: default;
     color: rgb(163, 163, 163);
     font-size: 12px;
     text-transform: uppercase;
