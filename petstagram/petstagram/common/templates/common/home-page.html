@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h1 class='text-center'>All pet photos</h1>
-        <div class="row">
-            {% for pet in pets %}
-            <div class="col-lg-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{ pet.image.url }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ pet.name }}</h5>
-                        <p class="card-text">{{ pet.description }}</p>
-                        <a href="{% url 'pet details'  pet.id %}" class="btn btn-primary">See details</a>
-                    </div>
-                </div>
-            </div>
+    <h1>All pet photos</h1>
+    {% if all_photos %}
+        {% for photo in all_photos %}
+            <p>Photo posted by: {{ photo.created_by_user.get_full_name }}</p>
+            <p>Location: {{ photo.photo_shooting_location }}</p>
+            <p>Photo picture: {{ photo.photo_file.url }}</p>
+            <p>Likes: {{ photo.likes }}</p>
+            {% for pet in photo.tagged_pets.all %}
+                <p>Pet Name: {{ pet.name }}</p>
             {% endfor %}
-        </div>
-    </div>
+            <p>Date/ Time of Publication: {{ photo.date_time_of_publication }}</p>
+            <form method="post" action="{% url 'add-comment' photo.id %}">
+                {% csrf_token %}
+                {{ comment_form }}
+            <input type="submit" value="Comment">
+            </form>
+        {% endfor %}
+    {% else %}
+        No photos yet
+    {% endif %}
 {% endblock %}
