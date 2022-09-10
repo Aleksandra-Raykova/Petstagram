@@ -1,10 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     {% include './common_templates/header.html' %}
 <body>
     {% include './common_templates/nav.html' %}
-    {% block content %}
-    {% endblock %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
-    {% include './common_templates/footer.html' %}
 </html>
