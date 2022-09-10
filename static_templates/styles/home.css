@@ -103,7 +103,6 @@ body {
     height: 25px;
     border-radius: 50%;
     overflow: hidden;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,7 +164,6 @@ main .container {
 
 .profilepic {
     display: inline-block;
-    cursor: pointer;
 }
 
 .profilepic .profile_img {
@@ -179,7 +177,6 @@ main .container {
     background: linear-gradient(to right, red, orange);
     padding: 2px;
     margin-right: 8px;
-    cursor: pointer;
 }
 
 .profilepic .profile_img .image {
@@ -188,7 +185,6 @@ main .container {
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,6 +211,7 @@ main .container {
     color: #4d4d4f;
     font-weight: 500;
     line-height: 1em;
+    white-space: nowrap; 
 }
 
 .col-9 .card .top .userDetails h3 span {
@@ -276,7 +273,7 @@ main .container {
     color: #1d92ff;
 }
 
-.comments {
+.details {
     margin-top: 10px;
     font-weight: 400;
     color: #999;

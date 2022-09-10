@@ -1,0 +1,35 @@
+.pet-details {
+    margin: 5px 0 5px -1px;
+}
+
+.comments {
+    display: flex;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.comments .top {
+    padding: 10px !important;
+}
+
+.comments p {
+    margin-top: 9.5px;
+    font-size: 13px;
+    width: 70%;
+    font-weight: bold;
+    color: rgb(70, 65, 65);
+}
+
+.add-comment-details .addComments {
+    margin-top: 1px !important;
+}
+
+.edit-delete-btns {
+    margin-left: 68%;
+    margin-top: 9px;
+}
+
+.edit-delete-btns img {
+    width: 25px;
+    margin-left: 10px;
+}
