@@ -103,7 +103,6 @@ body {
     height: 25px;
     border-radius: 50%;
     overflow: hidden;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,7 +164,6 @@ main .container {
 
 .profilepic {
     display: inline-block;
-    cursor: pointer;
 }
 
 .profilepic .profile_img {
@@ -179,7 +177,6 @@ main .container {
     background: linear-gradient(to right, red, orange);
     padding: 2px;
     margin-right: 8px;
-    cursor: pointer;
 }
 
 .profilepic .profile_img .image {
@@ -188,7 +185,6 @@ main .container {
     height: 100%;
     border-radius: 50%;
     overflow: hidden;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,6 +211,7 @@ main .container {
     color: #4d4d4f;
     font-weight: 500;
     line-height: 1em;
+    white-space: nowrap; 
 }
 
 .col-9 .card .top .userDetails h3 span {
@@ -255,6 +252,7 @@ main .container {
     font-weight: 500;
     margin-top: 5px;
     font-size: 14px;
+    cursor: default;
     color: #4d4d4f;
 }
 
@@ -275,7 +273,7 @@ main .container {
     color: #1d92ff;
 }
 
-.comments {
+.details {
     margin-top: 10px;
     font-weight: 400;
     color: #999;
@@ -318,6 +316,7 @@ input.text::placeholder {
 .postTime {
     margin-top: 8px;
     font-weight: lighter;
+    cursor: default;
     color: rgb(163, 163, 163);
     font-size: 12px;
     text-transform: uppercase;
@@ -375,11 +374,11 @@ a {
 
 }
 
-.footer {
+.container .footer {
     text-align: center;
 }
 
-.footer .footer-section {
+.container .footer .footer-section {
     position: relative;
     width: 100%;
     bottom: 0;
@@ -387,6 +386,6 @@ a {
     font-family: sans-serif;
 }
 
-.footer a:hover {
+.container .footer a:hover {
     color: #ff0000;
 }

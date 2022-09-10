@@ -40,13 +40,7 @@
 
 						<li class="nav-item">
 							<a href="">
-								<i>Login</i>
-							</a>
-						</li>
-
-                        <li class="nav-item">
-							<a href="">
-								<i>Register</i>
+								<i>Profile</i>
 							</a>
 						</li>
 					</ul>
@@ -56,20 +50,27 @@
 	</header>
 
     <main>
-        <div class="login-register-div">
-            <div class="login-register-box">
-                <h1>Petstagram</h1>
-                <form action="">
-                    <input type="text" placeholder="Username">
-                    <br>
-                    <input type="password" placeholder="Password">
-                    <br>
-                    <button type="submit">Log in</button>
-                </form>
-            </div>
-            <div class="second-option">
-                <p>Don't have account? <a href="">Register</a></p>
-            </div>
+        <div class="edit-delete-pet">
+            <h2>Add photo</h2>
+
+            <form action="">
+				<input type="text" placeholder="Link to image">
+                <br>
+
+                <input type="text" placeholder="Description">
+                <br>
+				<label for="pets">Tag Pets:</label>
+				<br>
+
+				<select name="pets" id="pets" multiple>
+					<option>Sasho</option>
+					<option>Perry</option>
+					<option>Bucky</option>
+					<option>Steve</option>
+				</select>
+
+                <button class="add-btn" type="submit">Add Photo</button>
+            </form>
         </div>
     </main>
 </body>

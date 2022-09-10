@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="./images/free-30-instagram-stories-icons23_122570.png">
+    <title>Petstagram</title>
+
+</head>
+
+<body>
+
+    <!-- Our Header section Starts from here -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">
+                        <img width="50px" src="./images/free-30-instagram-stories-icons23_122570.png" alt="img1">
+                    </a>
+
+
+                    <a class="home" href="#">
+                        <i>Petstagram</i>
+                    </a>
+                </div>
+
+                <div class="nav-links">
+                    <ul class="nav-group">
+                        <li class="nav-item">
+                            <a href="">
+                                <i>Add Pet</i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="">
+                                <i>Add Photo</i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="">
+                                <i>Profile</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="edit-delete">
+            <h2>Edit Profile</h2>
+
+            <form action="">
+                <div class="label-input">
+                    <label for="first name">First name: </label>
+                    <input type="text" placeholder="First name" value="Diyan">
+                </div>
+                <br>
+                <div class="label-input">
+                    <label for="last name">Last name: </label>
+                    <input type="text" placeholder="Last name" value="Kalayadzhiev">
+                </div>
+                <br>
+                <div class="label-input">
+                    <label for="username">Username: </label>
+                    <input type="text" placeholder="Username" value="k_dido">
+                </div>
+                <br>
+                <div class="label-input">
+                    <label for="email">Email: </label>
+                    <input type="email" placeholder="Email" value="d.denov@gmail.com">
+                </div>
+                <br>
+                <div class="label-input">
+                    <label for="image">Image: </label>
+                    <input type="text" placeholder="Link to to profile picture"
+                        value="https://i.natgeofe.com/n/de94c416-6d23-45f5-9708-e8d56289268e/naturepl_01132178.jpg?w=636&h=631">
+                </div>
+                <br>
+
+                <div class="label-input">
+                    <label for="image">Gender: </label>
+                    <div class="list-choice">
+                        <div class="list-choice-title">Gender</div>
+                        <div class="list-choice-objects">
+                            <label>
+                                <input type="radio" name="gender" /> <span>Male</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" /> <span>Female</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" /> <span>Other</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="gender" /> <span>Do not show</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="edit-btn" type="submit">Edit</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
