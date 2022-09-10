@@ -374,11 +374,11 @@ a {
 
 }
 
-.footer {
+.container .footer {
     text-align: center;
 }
 
-.footer .footer-section {
+.container .footer .footer-section {
     position: relative;
     width: 100%;
     bottom: 0;
@@ -386,6 +386,6 @@ a {
     font-family: sans-serif;
 }
 
-.footer a:hover {
+.container .footer a:hover {
     color: #ff0000;
 }
