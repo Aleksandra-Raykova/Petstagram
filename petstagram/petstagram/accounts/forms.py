@@ -5,22 +5,32 @@ from petstagram.pets.models import Pet
 
 
 class CreateProfileForm(auth_forms.UserCreationForm):
-    first_name = forms.CharField(
-        max_length=25,
-    )
-    last_name = forms.CharField(
-        max_length=25,
-    )
-    picture = forms.URLField()
-    date_of_birth = forms.DateField()
     email = forms.EmailField()
-    gender = forms.ChoiceField(
-        choices=Profile.GENDERS,
-    )
 
     def save(self, commit=True):
         user = super().save(commit=commit)
+        profile = Profile(email=self.cleaned_data['email'], user=user)
+        if commit:
+            profile.save()
+        return user
 
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email', 'password1', 'password2']
+
+
+class EditProfileForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=25)
+    last_name = forms.CharField(max_length=25)
+    picture = forms.URLField()
+    date_of_birth = forms.DateField()
+    gender = forms.ChoiceField(choices=Profile.GENDERS)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        user = super().save(commit=commit)
         profile = Profile(
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
@@ -36,71 +46,12 @@ class CreateProfileForm(auth_forms.UserCreationForm):
         return user
 
     class Meta:
-        model = get_user_model()
-        fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'picture')
-        widgets = {
-            'first_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter first name',
-                }
-            ),
-            'last_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter last name',
-                }
-            ),
-            'picture': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter URL',
-                }
-            ),
-        }
-
-
-class EditProfileForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.initial['gender'] = Profile.DO_NOT_SHOW
-
-    class Meta:
         model = Profile
-        fields = '__all__'
-        widgets = {
-            'first_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter first name',
-                }
-            ),
-            'last_name': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter last name',
-                }
-            ),
-            'picture': forms.TextInput(
-                attrs={
-                    'placeholder': 'Enter URL',
-                }
-            ),
-            'email': forms.EmailInput(
-                attrs={
-                    'placeholder': 'Enter email',
-                }
-            ),
-            'description': forms.Textarea(
-                attrs={
-                    'placeholder': 'Enter description',
-                    'rows': 3,
-                },
-            ),
-            'date_of_birth': forms.DateInput(
-                attrs={
-                    'min': '1920-01-01',
-                }
-            )
-        }
+        exclude = ('slug',)
 
 
 class DeleteProfileForm(forms.ModelForm):
+
     def save(self, commit=True):
         # Not good
         # should be done with signals

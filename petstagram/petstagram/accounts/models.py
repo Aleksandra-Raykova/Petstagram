@@ -1,6 +1,8 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.template.defaultfilters import slugify
+
 from petstagram.accounts.managers import PetstagramUserManager
 
 
@@ -27,6 +29,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=30, validators=(MinLengthValidator(2),), null=True, blank=True)
     profile_picture = models.URLField(null=True, blank=True)
     gender = models.CharField(max_length=11, choices=GENDERS, null=True, blank=True, default=DO_NOT_SHOW)
+    slug = models.SlugField()
 
     def get_full_name(self):
         full_name = '%s %s' % (self.first_name, self.last_name)
@@ -37,6 +40,11 @@ class Profile(models.Model):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         ...
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.user.username)
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         user_info = '%s %s' % (self.user.username, self.get_full_name())

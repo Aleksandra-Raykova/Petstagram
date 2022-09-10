@@ -6,5 +6,9 @@
 </head>
 <body>
 Profile Edit Page
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+</form>
 </body>
 </html>

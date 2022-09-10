@@ -18,4 +18,5 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    ...
+    user = models.ForeignKey(to=PetstagramUser, on_delete=models.CASCADE)
+    photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE)
