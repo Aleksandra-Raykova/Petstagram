@@ -8,6 +8,7 @@ from petstagram.accounts.models import PetstagramUser
 class Pet(models.Model):
     name = models.CharField(max_length=20)  # TODO pet names should be unique per user
     date_of_birth = models.DateField()  # TODO to be calendar to choose dates from
+    pet_photo = models.URLField(null=True, blank=True)  # TODO should not be blank and null!! change it when migrating
     slug = models.SlugField()
     user_profile = models.ForeignKey(to=PetstagramUser, on_delete=models.CASCADE)
 

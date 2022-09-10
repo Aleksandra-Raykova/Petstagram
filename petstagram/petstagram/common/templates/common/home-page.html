@@ -10,8 +10,10 @@
             <p>Likes: {{ photo.likes }}</p>
             {% for pet in photo.tagged_pets.all %}
                 <p>Pet Name: {{ pet.name }}</p>
+                <a href="{% url 'pet-details' pet.user_profile.username pet.slug %}" class="button">Pet Details</a>
             {% endfor %}
             <p>Date/ Time of Publication: {{ photo.date_time_of_publication }}</p>
+            <a href="{% url 'photo-details-page' photo.id %}" class="button">See Details</a>
             <form method="post" action="{% url 'add-comment' photo.id %}">
                 {% csrf_token %}
                 {{ comment_form }}

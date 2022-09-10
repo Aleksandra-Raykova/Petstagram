@@ -3,6 +3,8 @@
 {% block content %}
     <p>{{ pet.name }}</p>
     <p>{{ pet.date_of_birth }}</p>
+    <a href="{% url 'edit-pet' pet.user_profile.username pet.slug %}" class="button">Edit Pet</a>
+    <a href="{% url 'delete-pet' pet.user_profile.username pet.slug %}" class="button">Delete Pet</a>
     {% for photo in photos %}
         <p>{{ photo.description }}</p>
     {% endfor %}

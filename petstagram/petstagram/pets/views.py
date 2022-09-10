@@ -5,6 +5,10 @@ from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
 
 
+def get_pet_object(user, slug):
+    return get_object_or_404(Pet, slug=slug, user_profile__username=user)
+
+
 def add_pet(request):
     form = PetForm(request.POST or None)
     if form.is_valid():
@@ -17,15 +21,25 @@ def add_pet(request):
 
 
 def show_pet_details(request, username, pet_slug):
-    pet = get_object_or_404(Pet, slug=pet_slug, user_profile__username=username)
+    pet = get_pet_object(username, pet_slug)
     photos = get_list_or_404(Photo, tagged_pets__name=pet.name)
     context = {"pet": pet, "photos": photos}
     return render(request=request, template_name='pets/pet-details-page.html', context=context)
 
 
 def edit_pet(request, username, pet_slug):
-    return render(request=request, template_name='pets/pet-edit-page.html')
+    pet = get_pet_object(username, pet_slug)
+    if request.method == "GET":
+        form = PetForm(initial=pet.__dict__)
+    else:
+        form = PetForm(request.POST, instance=pet)
+        if form.is_valid():
+            form.save()
+            return redirect('pet-details', username, pet_slug)
+    context = {'form': form}
+    return render(request=request, template_name='pets/pet-edit-page.html', context=context)
 
 
 def delete_pet(request, username, pet_slug):
+    pet = get_pet_object(username, pet_slug)
     return render(request=request, template_name='pets/pet-delete-page.html')
