@@ -23,6 +23,10 @@
 	text-shadow: 1px 1px rgb(65, 63, 63);
 }
 
+.edit-delete label {
+	display: none;
+}
+
 .edit-delete input {
 	background-color: rgb(240, 230, 230);
 	border: 0.1px solid rgb(186, 184, 184);
@@ -36,6 +40,7 @@
 .edit-delete button {
 	color: white;
 	font-weight: bold;
+	font-size: 13px;
 	border: none;
 	width: 100%;
 	border-radius: 3px;
@@ -43,6 +48,10 @@
 	height: 30px;
     box-shadow: 2px 3px #888888;
     cursor: pointer;
+}
+
+.edit-delete a {
+	color: white;
 }
 
 .delete-btn {

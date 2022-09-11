@@ -4,10 +4,19 @@ from django.utils.text import slugify
 from petstagram.pets.models import Pet
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class PetForm(forms.ModelForm):
     class Meta:
         model = Pet
         fields = ['name', 'date_of_birth', 'pet_photo']
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Pet name'}),
+            'date_of_birth': DateInput(),
+            'pet_photo': forms.TextInput(attrs={'placeholder': 'Link to image'}),
+        }
 
 
 class DeletePetForm(PetForm):
