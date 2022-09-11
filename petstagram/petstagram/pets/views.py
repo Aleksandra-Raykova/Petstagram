@@ -5,8 +5,8 @@ from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
 
 
-def get_pet_object(user, slug):
-    return get_object_or_404(Pet, slug=slug, user_profile__username=user)
+def get_pet_object(user, pet):
+    return get_object_or_404(Pet, slug=pet, user_profile__slug=user)
 
 
 def add_pet(request):
@@ -20,28 +20,28 @@ def add_pet(request):
     return render(request=request, template_name='pets/pet-add-page.html', context=context)
 
 
-def show_pet_details(request, username, pet_slug):
-    pet = get_pet_object(username, pet_slug)
+def show_pet_details(request, user_slug, pet_slug):
+    pet = get_pet_object(user_slug, pet_slug)
     photos = get_list_or_404(Photo, tagged_pets__name=pet.name)
     context = {"pet": pet, "photos": photos}
     return render(request=request, template_name='pets/pet-details-page.html', context=context)
 
 
-def edit_pet(request, username, pet_slug):
-    pet = get_pet_object(username, pet_slug)
+def edit_pet(request, user_slug, pet_slug):
+    pet = get_pet_object(user_slug, pet_slug)
     if request.method == "GET":
         form = PetForm(initial=pet.__dict__)
     else:
         form = PetForm(request.POST, instance=pet)
         if form.is_valid():
             form.save()
-            return redirect('pet-details', username, pet_slug)
+            return redirect('pet-details', user_slug, pet_slug)
     context = {'form': form}
     return render(request=request, template_name='pets/pet-edit-page.html', context=context)
 
 
-def delete_pet(request, username, pet_slug):
-    pet = get_pet_object(username, pet_slug)
+def delete_pet(request, user_slug, pet_slug):
+    pet = get_pet_object(user_slug, pet_slug)
     if request.method == 'POST':
         pet.delete()
         return redirect('home')

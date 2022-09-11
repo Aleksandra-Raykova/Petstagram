@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="col-9">
-    {% include 'common/search-bar.html' %}
+        {% include 'common/search-bar.html' %}
         {% for photo in all_photos %}
             <div class="card">
                 <div class="top">
@@ -15,9 +15,15 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>{{ photo.created_by_user }}
+                        <h3>{% if photo.created_by_user.get_user_name %}
+                            {{ photo.created_by_user.get_user_name }}
+                        {% else %}
+                            {{ photo.created_by_user.user.username }}
+                        {% endif %}
                             <br>
+                        {% if photo.photo_shooting_location %}
                             <span>{{ photo.photo_shooting_location }}</span>
+                        {% endif %}
                         </h3>
                     </div>
                 </div>
@@ -73,10 +79,10 @@
                         </div>
                     </div>
                     <a href="#">
-                        <p class="likes">{{ photo.likes }} likes</p>
+                        <p class="likes">{{ photo.like_set.count }} likes</p>
                     </a>
                     {% for tagged_pet in photo.tagged_pets.all %}
-                        <a href="#">
+                        <a href="{% url 'pet-details' tagged_pet.user_profile.slug tagged_pet.slug %}">
                             <p class="message">
                                 <b>{{ tagged_pet }}</b>
                             </p>
@@ -100,6 +106,6 @@
                 </div>
             </div>
         {% endfor %}
-    {% include 'common_templates/footer.html' %}
+        {% include 'common_templates/footer.html' %}
     </div>
 </div>

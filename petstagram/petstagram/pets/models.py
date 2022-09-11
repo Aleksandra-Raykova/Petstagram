@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from petstagram.accounts.models import PetstagramUser
+from petstagram.accounts.models import PetstagramUser, Profile
 
 
 class Pet(models.Model):
@@ -10,7 +10,7 @@ class Pet(models.Model):
     date_of_birth = models.DateField()
     pet_photo = models.URLField()
     slug = models.SlugField()
-    user_profile = models.ForeignKey(to=PetstagramUser, on_delete=models.CASCADE)
+    user_profile = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.slug:
