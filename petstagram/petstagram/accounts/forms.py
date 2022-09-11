@@ -5,6 +5,9 @@ from petstagram.pets.models import Pet
 from django.contrib.auth.forms import AuthenticationForm
 
 
+UserModel = get_user_model()
+
+
 class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,36 +54,30 @@ class CreateProfileForm(auth_forms.UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 
+class EditUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=UserModel.MAX_USERNAME_LEN)
+
+    class Meta:
+        model = UserModel
+        fields = ['username']
+
+
 class EditProfileForm(forms.ModelForm):
-    username = forms.CharField(max_length=Profile.MAX_NAME_LEN)
     first_name = forms.CharField(max_length=Profile.MAX_NAME_LEN)
-    last_name = forms.CharField(max_length=25)
-    picture = forms.URLField()
-    date_of_birth = forms.DateField()
-    gender = forms.ChoiceField(choices=Profile.GENDERS)
+    last_name = forms.CharField(max_length=Profile.MAX_NAME_LEN)
+    profile_picture = forms.URLField()
+    gender = forms.ChoiceField(choices=Profile.GENDERS, widget=forms.RadioSelect)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        user = super().save(commit=commit)
-        profile = Profile(
-            first_name=self.cleaned_data['first_name'],
-            last_name=self.cleaned_data['last_name'],
-            picture=self.cleaned_data['picture'],
-            date_of_birth=self.cleaned_data['date_of_birth'],
-            email=self.cleaned_data['email'],
-            gender=self.cleaned_data['gender'],
-            user=user,
-        )
-
-        if commit:
-            profile.save()
-        return user
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = False
+        self.fields['last_name'].required = False
+        self.fields['profile_picture'].required = False
+        self.fields['gender'].required = False
 
     class Meta:
         model = Profile
-        exclude = ('slug',)
+        exclude = ('slug', 'user', 'date_of_birth')
 
 
 class DeleteProfileForm(forms.ModelForm):

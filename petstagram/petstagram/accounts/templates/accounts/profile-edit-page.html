@@ -7,29 +7,31 @@
 
         <form method="post">
             {% csrf_token %}
+            {{ user_form.errors }}
+            {{ form.errors }}
             <div class="label-input">
-                <label for="username">Username: </label>
-                {{ form.username }}
+                <label for="first name">Username: </label>
+                {{ user_form.username }}
             </div>
             <br>
             <div class="label-input">
                 <label for="first name">First name: </label>
-                {{ form.first_name }}
+                {{ profile_form.first_name }}
             </div>
             <br>
             <div class="label-input">
                 <label for="last name">Last name: </label>
-                {{ form.last_name }}
+                {{ profile_form.last_name }}
             </div>
             <br>
             <div class="label-input">
                 <label for="email">Email: </label>
-                {{ form.email }}
+                {{ profile_form.email }}
             </div>
             <br>
             <div class="label-input">
                 <label for="image">Image: </label>
-                {{ form.picture }}
+                {{ profile_form.profile_picture }}
             </div>
             <br>
 
@@ -38,10 +40,10 @@
                 <div class="list-choice">
                     <div class="list-choice-title">Gender</div>
                     <div class="list-choice-objects">
-                        {% for type, value in form.fields.gender.choices %}
+                        {% for type, value in profile_form.fields.gender.choices %}
                             <label>
-                                <input type="radio" name="gender"
-                                        {% if form.gender.value == value %}
+                                <input type="radio" value="{{ value }}" name="gender"
+                                        {% if profile_form.gender.value == value %}
                                             checked
                                         {% endif %}/>
                                 <span>{{ value }}</span>

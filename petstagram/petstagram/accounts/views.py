@@ -1,10 +1,28 @@
 from django.contrib.auth import views as auth_views, get_user_model
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from petstagram.accounts.forms import CreateProfileForm, EditProfileForm, DeleteProfileForm, CustomLoginForm
-from petstagram.accounts.models import Profile, PetstagramUser
+from petstagram.accounts.forms import CreateProfileForm, EditProfileForm, DeleteProfileForm, CustomLoginForm, \
+    EditUserForm
+from petstagram.accounts.models import Profile
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from petstagram.pets.models import Pet
+
+
+def edit_profile_view(request, slug):
+    if request.method == 'POST':
+        user_form = EditUserForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, request.FILES, instance=Profile.objects.get(user=request.user))
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect(to='home')
+    else:
+        user_form = EditUserForm(instance=request.user)
+        profile_form = EditProfileForm(instance=Profile.objects.get(user=request.user))
+
+    return render(request, 'accounts/profile-edit-page.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 class UserRegisterView(views.CreateView):
@@ -23,13 +41,6 @@ class UserLoginView(auth_views.LoginView):
         if self.success_url:
             return self.success_url
         return super().get_success_url()
-
-
-class EditProfileView(views.UpdateView):
-    model = Profile
-    form_class = EditProfileForm
-    template_name = 'accounts/profile-edit-page.html'
-    success_url = reverse_lazy('profile-details')
 
 
 class DeleteProfileView(views.DeleteView):

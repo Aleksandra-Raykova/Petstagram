@@ -7,6 +7,8 @@ from petstagram.accounts.managers import PetstagramUserManager
 
 
 class PetstagramUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
+    MAX_USERNAME_LEN = 25
+
     username = models.CharField(max_length=25, unique=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     is_staff = models.BooleanField(default=False)
@@ -16,7 +18,7 @@ class PetstagramUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin)
 
 
 class Profile(models.Model):
-    MAX_NAME_LEN = 30
+    MAX_NAME_LEN = 25
     MALE = 'Male'
     FEMALE = 'Female'
     DO_NOT_SHOW = 'Do not show'
