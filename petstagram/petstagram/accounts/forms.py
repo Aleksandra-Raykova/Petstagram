@@ -2,10 +2,42 @@ from django import forms
 from django.contrib.auth import forms as auth_forms, get_user_model
 from petstagram.accounts.models import Profile
 from petstagram.pets.models import Pet
+from django.contrib.auth.forms import AuthenticationForm
+
+
+class CustomLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs.update(
+            {'placeholder': 'Username'}
+        )
+        self.fields['password'].widget.attrs.update(
+            {'placeholder': 'Password'}
+        )
 
 
 class CreateProfileForm(auth_forms.UserCreationForm):
     email = forms.EmailField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name in ['username', 'password1', 'password2']:
+            self.fields[field_name].help_text = None
+
+        self.fields['username'].widget.attrs.update(
+            {'placeholder': 'Username'}
+        )
+        self.fields['email'].widget.attrs.update(
+            {'placeholder': 'Email'}
+        )
+        self.fields['password1'].widget.attrs.update(
+            {'placeholder': 'Password'}
+        )
+        self.fields['password2'].widget.attrs.update(
+            {'placeholder': 'Repeat password'}
+        )
 
     def save(self, commit=True):
         user = super().save(commit=commit)

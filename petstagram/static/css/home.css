@@ -34,6 +34,12 @@ body {
     /* margin: 0 auto; */
 }
 
+.errorlist li {
+    width: 200px;
+    color: red;
+    list-style-type: none;
+}
+
 .container .logo {
     display: flex;
     cursor: pointer;

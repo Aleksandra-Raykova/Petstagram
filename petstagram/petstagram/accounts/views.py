@@ -1,6 +1,6 @@
 from django.contrib.auth import views as auth_views, get_user_model
 from django.urls import reverse_lazy
-from petstagram.accounts.forms import CreateProfileForm, EditProfileForm, DeleteProfileForm
+from petstagram.accounts.forms import CreateProfileForm, EditProfileForm, DeleteProfileForm, CustomLoginForm
 from petstagram.accounts.models import Profile, PetstagramUser
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
@@ -16,6 +16,7 @@ class UserRegisterView(views.CreateView):
 
 class UserLoginView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
+    authentication_form = CustomLoginForm
     success_url = reverse_lazy('home')
 
     def get_success_url(self):

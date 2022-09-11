@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container mb-5">
-    <h1 class="text-center">Login to Your Profile</h1>
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
+    <div class="login-register-div">
+        <div class="login-register-box">
+            <h1>Petstagram</h1>
 
             <!-- Login Form -->
             <form method="POST">
                 {% csrf_token %}
-                {{ form }}
-                <br>
-                <button class="btn btn-primary mt-2" type="submit">Log in</button>
+                {{ form.as_p }}
+                <button type="submit">Log in</button>
             </form>
             <!-- End Login Form -->
-
         </div>
-        <div class="col-lg-3"></div>
+
+        <div class="second-option">
+            <p>Don't have account? <a href={% url 'register' %}>Register</a></p>
+        </div>
     </div>
-</div>
 {% endblock %}
