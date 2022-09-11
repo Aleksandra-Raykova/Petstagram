@@ -31,12 +31,15 @@ class Profile(models.Model):
     gender = models.CharField(max_length=11, choices=GENDERS, null=True, blank=True, default=DO_NOT_SHOW)
     slug = models.SlugField()
 
-    def get_full_name(self):
-        full_name = '%s %s' % (self.first_name, self.last_name)
-        return full_name.strip()
-
-    def get_short_name(self):
-        return self.first_name
+    def get_user_name(self):
+        name = None
+        if self.first_name and self.last_name:
+            name = '%s %s' % (self.first_name, self.last_name)
+        elif self.first_name:
+            name = '%s' % self.first_name
+        elif self.last_name:
+            name = '%s' % self.last_name
+        return name
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         ...
@@ -47,5 +50,5 @@ class Profile(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        user_info = '%s %s' % (self.user.username, self.get_full_name())
+        user_info = '%s %s' % (self.user.username, self.get_user_name())
         return user_info

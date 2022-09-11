@@ -6,5 +6,9 @@
 </head>
 <body>
 Add Photo Page
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+</form>
 </body>
 </html>

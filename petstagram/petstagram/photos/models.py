@@ -16,4 +16,4 @@ class Photo(models.Model):
         ordering = ['date_time_of_publication']
 
     def __str__(self):
-        return 'Photo {} by {}'.format(self.description[:10], self.created_by_user.get_full_name())
+        return 'Photo {} by {}'.format(self.description[:10], self.created_by_user.get_user_name())

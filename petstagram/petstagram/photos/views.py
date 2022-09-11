@@ -12,10 +12,11 @@ def add_photo(request):
         pet.save()
         return redirect('home')
     context = {"form": form}
-    return render(request=request, template_name='photos/photo-add-page.html')
+    return render(request=request, template_name='photos/photo-add-page.html', context=context)
 
 
 def show_photo_details(request, pk):
+    # TODO add likes and comments for this photo
     photo = get_object_or_404(Photo, pk=pk)
     context = {"photo": photo}
     return render(request=request, template_name='photos/photo-details-page.html', context=context)

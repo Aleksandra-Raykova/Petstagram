@@ -6,5 +6,19 @@
 </head>
 <body>
 Photo Details Page
+{% if photo.created_by_user.get_user_name %}
+    <p>User full name: {{ photo.created_by_user.get_user_name }}</p>
+{% else %}
+    <p>Username: {{ photo.created_by_user.user.username }}</p>
+{% endif %}
+
+{% if photo.photo_shooting_location %}
+    <p>Location: {{ photo.photo_shooting_location }}</p>
+{% endif %}
+
+<a href="{% url 'edit-photo' photo.id %}" type="button">Edit</a>
+<a href="{% url 'delete-photo' photo.id %}" type="button">Delete</a>
+
+<img src="{{ photo.photo_file.url }}" alt="{{ photo.description }}">
 </body>
 </html>
