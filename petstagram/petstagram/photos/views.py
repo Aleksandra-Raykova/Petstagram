@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
+from petstagram.common.forms import CommentForm
 from petstagram.photos.forms import CreatePhotoForm, EditPhotoForm
 from petstagram.photos.models import Photo
 
@@ -16,9 +17,11 @@ def add_photo(request):
 
 
 def show_photo_details(request, pk):
-    # TODO add likes and comments for this photo
     photo = get_object_or_404(Photo, pk=pk)
-    context = {"photo": photo}
+    total_likes_count = photo.like_set.count()
+    comments = photo.comment_set.all()
+    comment_form = CommentForm()
+    context = {"photo": photo, "total_likes_count": total_likes_count, "comments": comments, "comment_form": comment_form}
     return render(request=request, template_name='photos/photo-details-page.html', context=context)
 
 

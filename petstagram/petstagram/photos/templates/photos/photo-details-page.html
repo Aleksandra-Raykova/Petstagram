@@ -20,5 +20,16 @@ Photo Details Page
 <a href="{% url 'delete-photo' photo.id %}" type="button">Delete</a>
 
 <img src="{{ photo.photo_file.url }}" alt="{{ photo.description }}">
+<p>Likes: {{ total_likes_count }}</p>
+{% for comment in comments %}
+    <p>Comment</p>
+    <p>{{ comment.user.get_user_name }}</p>
+    <p>{{ comment.created_on }}</p>
+    <p>{{ comment.body }}</p>
+{% endfor %}
+<form method="post" action="{% url 'add-comment' photo.id %}">
+    {% csrf_token %}
+    {{ comment_form }}
+</form>
 </body>
 </html>
