@@ -1,14 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Profile Edit Page
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="edit-delete">
+        <h2>Edit Profile</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="label-input">
+                <label for="username">Username: </label>
+                {{ form.username }}
+            </div>
+            <br>
+            <div class="label-input">
+                <label for="first name">First name: </label>
+                {{ form.first_name }}
+            </div>
+            <br>
+            <div class="label-input">
+                <label for="last name">Last name: </label>
+                {{ form.last_name }}
+            </div>
+            <br>
+            <div class="label-input">
+                <label for="email">Email: </label>
+                {{ form.email }}
+            </div>
+            <br>
+            <div class="label-input">
+                <label for="image">Image: </label>
+                {{ form.picture }}
+            </div>
+            <br>
+
+            <div class="label-input">
+                <label for="image">Gender: </label>
+                <div class="list-choice">
+                    <div class="list-choice-title">Gender</div>
+                    <div class="list-choice-objects">
+                        {% for type, value in form.fields.gender.choices %}
+                            <label>
+                                <input type="radio" name="gender"
+                                        {% if form.gender.value == value %}
+                                            checked
+                                        {% endif %}/>
+                                <span>{{ value }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <button class="edit-btn" type="submit">Edit</button>
+        </form>
+    </div>
+{% endblock %}

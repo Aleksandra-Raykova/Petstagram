@@ -16,6 +16,7 @@ class PetstagramUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin)
 
 
 class Profile(models.Model):
+    MAX_NAME_LEN = 30
     MALE = 'Male'
     FEMALE = 'Female'
     DO_NOT_SHOW = 'Do not show'
@@ -25,8 +26,8 @@ class Profile(models.Model):
     email = models.EmailField(unique=True)
     user = models.OneToOneField(to=PetstagramUser, on_delete=models.CASCADE, primary_key=True)
 
-    first_name = models.CharField(max_length=30, validators=(MinLengthValidator(2),), null=True, blank=True)
-    last_name = models.CharField(max_length=30, validators=(MinLengthValidator(2),), null=True, blank=True)
+    first_name = models.CharField(max_length=MAX_NAME_LEN, validators=(MinLengthValidator(2),), null=True, blank=True)
+    last_name = models.CharField(max_length=MAX_NAME_LEN, validators=(MinLengthValidator(2),), null=True, blank=True)
     profile_picture = models.URLField(null=True, blank=True)
     gender = models.CharField(max_length=11, choices=GENDERS, null=True, blank=True, default=DO_NOT_SHOW)
     slug = models.SlugField()

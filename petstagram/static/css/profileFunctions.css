@@ -147,6 +147,7 @@
 }
 
 .label-input label {
+    display: initial !important;
     width: 40%;
     margin-top: 12px;
     text-align: left;

@@ -52,7 +52,8 @@ class CreateProfileForm(auth_forms.UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=25)
+    username = forms.CharField(max_length=Profile.MAX_NAME_LEN)
+    first_name = forms.CharField(max_length=Profile.MAX_NAME_LEN)
     last_name = forms.CharField(max_length=25)
     picture = forms.URLField()
     date_of_birth = forms.DateField()
