@@ -4,11 +4,14 @@ from petstagram.common.forms import CommentForm
 from petstagram.common.models import Like
 from petstagram.photos.models import Photo
 
+from pyperclip import copy
+
 
 def show_home_page(request):
     all_photos = Photo.objects.all()
     comment_form = CommentForm()
     context = {"all_photos": all_photos, "comment_form": comment_form}
+
     return render(request=request, template_name='common/home-page.html', context=context)
 
 
@@ -35,5 +38,14 @@ def like_functionality(request, photo_pk):
     else:
         like = Like(photo=photo, user=request.user)
         like.save()
+
+    return redirect(request.META['HTTP_REFERER'] + f'#{photo_pk}')
+
+
+def copy_link_to_clipboard(request, photo_pk):
+    if "#" in str(request.META['HTTP_REFERER']):
+        copy(request.META['HTTP_REFERER'])
+    else:
+        copy(request.META['HTTP_REFERER'] + f'#{photo_pk}')
 
     return redirect(request.META['HTTP_REFERER'] + f'#{photo_pk}')
