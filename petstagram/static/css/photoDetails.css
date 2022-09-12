@@ -21,15 +21,16 @@
 }
 
 .add-comment-details .addComments {
-    margin-top: 1px !important;
+    margin-top: 0 !important;
 }
 
 .edit-delete-btns {
-    margin-left: 68%;
-    margin-top: 9px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
 }
 
 .edit-delete-btns img {
-    width: 25px;
-    margin-left: 10px;
+    width: 20px;
+    margin-left: 5px;
 }
