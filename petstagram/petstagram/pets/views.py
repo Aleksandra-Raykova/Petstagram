@@ -41,7 +41,7 @@ def show_pet_details(request, user_slug, pet_slug):
         "comment_form": comment_form,
     }
 
-    return render(request=request, template_name='pets/pet-profile-page.html', context=context)
+    return render(request=request, template_name='pets/pet-details-page.html', context=context)
 
 
 def edit_pet(request, user_slug, pet_slug):
