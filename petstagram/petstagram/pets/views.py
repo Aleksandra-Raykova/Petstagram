@@ -1,8 +1,14 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
+from petstagram.accounts.models import Profile
+from petstagram.common.forms import CommentForm
 from petstagram.pets.forms import PetForm, DeletePetForm
 from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
+
+
+UserModel = get_user_model()
 
 
 def get_pet_object(user, pet):
@@ -22,9 +28,19 @@ def add_pet(request):
 
 
 def show_pet_details(request, user_slug, pet_slug):
+    user = UserModel.objects.get(username=user_slug)
+    profile = Profile.objects.get(user=user)
     pet = get_pet_object(user_slug, pet_slug)
     photos = get_list_or_404(Photo, tagged_pets__name=pet.name)
-    context = {"pet": pet, "photos": photos}
+    comment_form = CommentForm()
+
+    context = {
+        "profile": profile,
+        "pet": pet,
+        "all_photos": photos,
+        "comment_form": comment_form,
+    }
+
     return render(request=request, template_name='pets/pet-details-page.html', context=context)
 
 

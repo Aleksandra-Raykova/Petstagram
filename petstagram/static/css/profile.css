@@ -31,6 +31,10 @@
     margin-bottom: 15px;
 }
 
+.personal .edit p {
+    white-space: nowrap;
+}
+
 .personal .edit-img {
     width: 25px;
     margin-top: 8px;

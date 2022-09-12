@@ -293,9 +293,15 @@ main .container {
     padding: 10px 0;
 }
 
-.addComments a {
+.addComments button {
+    position: absolute;
+    right: 30px;
     color: #1d92ffcb;
     font-weight: 500;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
 }
 
 .addComments .reaction {
@@ -305,8 +311,13 @@ main .container {
     color: rgb(88, 88, 88);
 }
 
-input.text {
-    width: 100%;
+textarea {
+    position: absolute;
+    left: 30px;
+    width: 85%;
+    resize: none;
+    overflow: hidden;
+    height: 20px;
     border: none;
     outline: none;
     font-weight: 400;
@@ -315,8 +326,17 @@ input.text {
     background: none;
 }
 
-input.text::placeholder {
+textarea.text::placeholder {
     color: #777;
+}
+
+.addComments form label {
+    display: none;
+}
+
+.addComments form {
+    display: flex;
+    margin-bottom: 15px;
 }
 
 .postTime {
