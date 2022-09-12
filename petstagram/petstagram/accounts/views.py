@@ -52,7 +52,7 @@ class DeleteProfileView(views.DeleteView):
 
 class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     model = Profile
-    template_name = 'accounts/profile-profile-page.html'
+    template_name = 'accounts/profile-details-page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
