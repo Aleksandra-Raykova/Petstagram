@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Add Photo Page
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="edit-delete edit-photo">
+        <h2>Add photo</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="add-btn" type="submit">Add Photo</button>
+        </form>
+    </div>
+{% endblock %}

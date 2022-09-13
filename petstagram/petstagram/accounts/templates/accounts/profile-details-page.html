@@ -1,48 +1,79 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block content%}
-  <div class="text-center">
-    <h1>Hello, {{ profile }}!</h1>
-      <img class="rounded-circle mb-3" src="{{ profile.image }}" alt="Generic placeholder image" width="140" height="140">
-    <h3>Birthdate: {{ profile.date_of_birth }}</h3>
-    <h3>Email: {{ profile.email }}</h3>
-    <h3>Gender: {{ profile.gender }}</h3>
-    <h3>Description: {{ profile.description }}</h3>
-    <p>Total images: {{ total_pets }}</p>
-    <p>Total likes: {{ total_likes_count }}</p>
-    {% if is_owner %}
-    <a href="#" class="btn btn-success">Edit</a>
-      <a href="#" class="btn btn-danger">Delete</a>
-    {% endif %}
-    <div class="w-50 m-auto">
-        {% csrf_token %}
-        {{ form }}
-    </div>
-  </div>
-    <hr>
-    {% if pets %}
-    <h2 class='text-center'>These are you pet photos</h2>
-  <div class="row">        
-        <div class="row">
-        {% for pet in pets %}
-        <div class="col-lg-4">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ pet.image.url }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pet.type }} {{ pet.name }}, Age: {{ pet.age }}</h5>
-                    <p class="card-text">{{ pet.description }}</p>
-                    <p class="card-text"><strong>Owner: {{ pet.user_profile }}</strong></p>
-                    <a href="{% url 'pet details'  pet.id %}" class="btn btn-primary">See details</a>
+{% block content %}
+    <div class="profile">
+        <div class="profile-data">
+            <div class="profile_img">
+                <div class="image">
+                    <img src="{{ profile.profile_picture }}" alt="img8">
                 </div>
             </div>
+            <div class="personal">
+                <div class="edit">
+                    <p>{{ user.username }}</p>
+                    <a href="{% url 'edit-profile' profile.slug %}">
+                        <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="edit button">
+                    </a>
+                    <a href="{% url 'delete-profile' profile.slug %}">
+                        <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
+                    </a>
+                </div>
+                <div class="data">
+                    <span>{{ photos|length }}</span>
+                    <p>photos</p>
+
+                    <span>{{ pets|length }}</span>
+                    <p>pets</p>
+
+                    <span>{{ total_likes_count }}</span>
+                    <p>likes</p>
+                </div>
+                <h3 class="names">
+                    {% if profile.first_name %}
+                        {{ profile.first_name }}
+                    {% endif %}
+                    {% if profile.last_name %}
+                        {{ profile.last_name }}
+                    {% endif %}
+                </h3>
+                <p class="email">
+                    {% if profile.email %}
+                        {{ profile.email }}
+                    {% endif %}
+                </p>
+                <p class="gender">
+                    {% if profile.gender and profile.gender != 'Do not show' %}
+                        {{ profile.gender }}
+                    {% endif %}
+                </p>
+            </div>
         </div>
-        {% endfor %}
+        <div class="pets">
+            <div class="statuses">
+                {% for pet in pets %}
+                    <a href="{% url 'pet-details' profile.slug pet.slug %}">
+                        <div class="head-pet">
+                            <div class="status">
+                                <div class="image">
+                                    <img src="{{ pet.pet_photo }}"
+                                         alt="pet img">
+                                </div>
+                            </div>
+                            <p>{{ pet.name }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="pet-photos">
+            {% for photo in photos %}
+                <a href="{% url 'photo-details' photo.id %}">
+                    <img src="{{ photo.photo_file.url }}"
+                         alt="pet img">
+                </a>
+            {% endfor %}
+        </div>
+        {% include 'common_templates/footer.html' %}
     </div>
-  </div>
-  {% else %}
-  <div class="text-center">
-    <h2>You have no pets</h2>
-    <a href="{% url 'create pet' %}" class="btn btn-success">Add Pet Photo</a>
-  </div>
-    {% endif %}
 {% endblock %}

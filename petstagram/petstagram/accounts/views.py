@@ -7,6 +7,7 @@ from petstagram.accounts.models import Profile
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 from petstagram.pets.models import Pet
+from petstagram.photos.models import Photo
 
 
 def edit_profile_view(request, slug):
@@ -56,16 +57,17 @@ class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        pets = list(Pet.objects.filter(user_profile=self.object.user))
-        total_likes_count = sum(p.like_set.count() for p in pets)
-        total_pets = len(pets)
+        pets = list(Pet.objects.filter(user_profile=self.object))
+        photos = Photo.objects.filter(created_by_user=self.object)
+        total_likes_count = sum(p.like_set.count() for p in photos)
 
         context.update({
+            'user': self.object.user,
             'profile': self.object,
             'is_owner': self.object.user.id == self.request.user.id,
             'total_likes_count': total_likes_count,
-            'total_pets': total_pets,
             'pets': pets,
+            'photos': photos,
         })
 
         return context

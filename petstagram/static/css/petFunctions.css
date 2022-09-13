@@ -27,7 +27,7 @@
 	display: none;
 }
 
-.edit-delete input {
+.edit-delete input, select {
 	background-color: rgb(240, 230, 230);
 	border: 0.1px solid rgb(186, 184, 184);
 	border-radius: 3px;
@@ -59,9 +59,7 @@
 }
 
 .edit-photo select {
-	margin-top: 18px;
-	background-color: rgb(240, 230, 230);
-	border: 0.1px solid rgb(186, 184, 184);
+
 }
 
 .edit-photo label {

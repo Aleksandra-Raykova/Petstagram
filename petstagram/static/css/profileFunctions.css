@@ -18,7 +18,7 @@
     z-index: 2;
 }
 
-.sure-buttons button {
+.sure-buttons button, .sure-buttons a {
     padding: 5px 10px 5px 10px;
     border: none;
     border-radius: 3px;
@@ -30,16 +30,16 @@
     z-index: 2;
 }
 
-.sure-buttons button:first-of-type {
-    background-color: green;
+.sure-buttons button {
+    background-color: red;
 }
 
-.sure-buttons button:hover {
+.sure-buttons button:hover, .sure-buttons a:hover {
     box-shadow: none;
 }
 
-.sure-buttons button:last-of-type {
-    background-color: red;
+.sure-buttons a {
+    background-color: green;
 }
 
 .delete-profile img {
