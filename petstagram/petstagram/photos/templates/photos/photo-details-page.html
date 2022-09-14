@@ -18,15 +18,18 @@
                             <br>
                             <span>{{ photo.photo_shooting_location }}</span>
                         </h3>
-
-                        <div class="edit-delete-btns">
-                            <a href="{% url 'edit-photo' photo.id %}">
-                                <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="edit button">
-                            </a>
-                            <a href="{% url 'delete-photo' photo.id %}">
-                                <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
-                            </a>
-                        </div>
+                        {% if request.user.is_authenticated %}
+                            <div class="edit-delete-btns">
+                                <a href="{% url 'edit-photo' photo.id %}">
+                                    <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}"
+                                         alt="edit button">
+                                </a>
+                                <a href="{% url 'delete-photo' photo.id %}">
+                                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}"
+                                         alt="bin button">
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
 
                 </div>
@@ -103,14 +106,24 @@
                         <div class="comments">
                             <div class="top">
                                 <div class="userDetails">
-                                    <div class="profilepic">
-                                        <div class="profile_img">
-                                            <div class="image">
-                                                <img src="{{ profile.profile_picture }}" alt="img8">
+                                    <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                                        <div class="profilepic">
+                                            <div class="profile_img">
+                                                <div class="image">
+                                                    <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <h3>{{ photo.created_by_user.first_name }} {{ photo.created_by_user.last_name }} -
+                                    </a>
+                                    <h3>
+                                        <a href="{% url 'profile-details' comment.user.slug %}">
+                                            {% if comment.user.get_user_name %}
+                                                {{ comment.user.get_user_name }}
+                                            {% else %}
+                                                {{ comment.user.user.username }}
+                                            {% endif %}
+                                        -
+                                        </a>
                                         <br>
                                         <span>{{ comment.created_on }}</span>
                                     </h3>
@@ -135,7 +148,6 @@
                     </div>
                 </div>
             </div>
-            {% include 'common_templates/footer.html' %}
         </div>
     </div>
 {% endblock %}

@@ -1,11 +1,11 @@
 from django.contrib.auth import views as auth_views, get_user_model
+from django.contrib.auth import mixins
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from petstagram.accounts.forms import CreateProfileForm, EditProfileForm, DeleteProfileForm, CustomLoginForm, \
     EditUserForm
 from petstagram.accounts.models import Profile
 from django.views import generic as views
-from django.contrib.auth import mixins as auth_mixins
 from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
 
@@ -44,14 +44,18 @@ class UserLoginView(auth_views.LoginView):
         return super().get_success_url()
 
 
-class DeleteProfileView(views.DeleteView):
+class UserLogoutView(auth_views.LogoutView):
+    pass
+
+
+class DeleteProfileView(mixins.LoginRequiredMixin, views.DeleteView):
     model = Profile
     form_class = DeleteProfileForm
     template_name = 'accounts/profile-delete-page.html'
     success_url = reverse_lazy('home')
 
 
-class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
+class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'accounts/profile-details-page.html'
 

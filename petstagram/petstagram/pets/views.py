@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
 from petstagram.accounts.models import Profile
@@ -15,6 +16,7 @@ def get_pet_object(user, pet):
     return get_object_or_404(Pet, slug=pet, user_profile__slug=user)
 
 
+@login_required
 def add_pet(request):
     form = PetForm(request.POST or None)
 
@@ -48,6 +50,7 @@ def show_pet_details(request, user_slug, pet_slug):
     return render(request=request, template_name='pets/pet-details-page.html', context=context)
 
 
+@login_required
 def edit_pet(request, user_slug, pet_slug):
     pet = get_pet_object(user_slug, pet_slug)
 
@@ -65,6 +68,7 @@ def edit_pet(request, user_slug, pet_slug):
     return render(request=request, template_name='pets/pet-edit-page.html', context=context)
 
 
+@login_required
 def delete_pet(request, user_slug, pet_slug):
     pet = get_pet_object(user_slug, pet_slug)
 

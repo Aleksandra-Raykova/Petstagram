@@ -4,18 +4,23 @@
     <div class="card" id="{{ photo.id }}">
         <div class="top">
             <div class="userDetails">
-                <div class="profilepic">
-                    <div class="profile_img">
-                        <div class="image">
-                            <img src="{{ photo.photo_file.url }}" alt="img8">
+                <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                    <div class="profilepic">
+                        <div class="profile_img">
+                            <div class="image">
+                                <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <h3>{% if photo.created_by_user.get_user_name %}
-                    {{ photo.created_by_user.get_user_name }}
-                {% else %}
-                    {{ photo.created_by_user.user.username }}
-                {% endif %}
+                </a>
+                <h3>
+                    <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                        {% if photo.created_by_user.get_user_name %}
+                            {{ photo.created_by_user.get_user_name }}
+                        {% else %}
+                            {{ photo.created_by_user.user.username }}
+                        {% endif %}
+                    </a>
                     <br>
                     {% if photo.photo_shooting_location %}
                         <span>{{ photo.photo_shooting_location }}</span>

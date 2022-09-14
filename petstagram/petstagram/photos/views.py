@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from petstagram.accounts.models import Profile
@@ -6,6 +7,7 @@ from petstagram.photos.forms import CreatePhotoForm, EditPhotoForm
 from petstagram.photos.models import Photo
 
 
+@login_required
 def add_photo(request):
     form = CreatePhotoForm(request.POST or None)
 
@@ -39,6 +41,7 @@ def show_photo_details(request, pk):
     return render(request=request, template_name='photos/photo-details-page.html', context=context)
 
 
+@login_required
 def edit_photo(request, pk):
     photo = get_object_or_404(Photo, pk=pk)
 
@@ -56,6 +59,7 @@ def edit_photo(request, pk):
     return render(request=request, template_name='photos/photo-edit-page.html', context=context)
 
 
+@login_required
 def delete_photo(request, pk):
     photo = get_object_or_404(Photo, pk=pk)
     photo.delete()

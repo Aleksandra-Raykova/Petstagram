@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from petstagram.common.forms import CommentForm
@@ -15,6 +16,7 @@ def show_home_page(request):
     return render(request=request, template_name='common/home-page.html', context=context)
 
 
+@login_required
 def add_comment_view(request, photo_pk):
     if request.method == 'POST':
         photo_object = Photo.objects.get(pk=photo_pk)
@@ -29,6 +31,7 @@ def add_comment_view(request, photo_pk):
         return redirect('home')  # TODO check is can redirect to the same page no matter which one it is
 
 
+@login_required
 def like_functionality(request, photo_pk):
     photo = Photo.objects.get(pk=photo_pk)
     like_object_by_user = photo.like_set.filter(user_id=request.user.id).first()
