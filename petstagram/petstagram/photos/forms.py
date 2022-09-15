@@ -12,6 +12,7 @@ class CreatePhotoForm(forms.ModelForm):
 class EditPhotoForm(CreatePhotoForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         for (_, field) in self.fields.items():
             if field == 'photo':
                 field.widget.attrs['disabled'] = 'disabled'

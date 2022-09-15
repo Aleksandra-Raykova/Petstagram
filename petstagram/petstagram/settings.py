@@ -18,19 +18,22 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+MY_APPS = [
+    'petstagram.common',
+    'petstagram.pets',
+    'petstagram.accounts',
+    'petstagram.photos',
+]
+
 INSTALLED_APPS = [
+    'easy_maps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'petstagram.common',
-    'petstagram.pets',
-    'petstagram.accounts',
-    'petstagram.photos',
-]
+] + MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -54,10 +54,14 @@ body {
     text-align: end;
 }
 
+.searchbar label {
+    display: none;
+}
+
 .searchbar input {
     background-color: #fafafa;
     width: 80%;
-    padding: 5px;
+    padding: 5px 5px 5px 0;
     text-indent: 21px;
     outline: none;
     border: 1px solid rgb(218, 217, 217);
@@ -65,10 +69,19 @@ body {
     color: rgb(77, 77, 77);
 }
 
+.searchbar button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 .searchbar img {
     position: absolute;
     margin-left: -2.5rem;
-    margin-top: 0.25rem;
+    margin-top: -0.8rem;
 }
 
 .searchbar input::placeholder {

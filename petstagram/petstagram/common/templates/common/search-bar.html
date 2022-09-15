@@ -1,8 +1,9 @@
 {% load static %}
 
-<div class="searchbar">
-    <input type="text" placeholder="Search">
-    <a href="">
+<form class="searchbar" method="post">
+    {% csrf_token %}
+    {{ search_form }}
+    <button>
         <img src="{% static 'images/search.png' %}" height="18" alt="img2">
-    </a>
-</div>
+    </button>
+</form>
