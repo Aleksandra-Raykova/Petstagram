@@ -42,11 +42,21 @@ class CreateProfileForm(auth_forms.UserCreationForm):
             {'placeholder': 'Repeat password'}
         )
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        if email in [p.email for p in Profile.objects.all()]:
+            raise forms.ValidationError('User with that email already exists')
+
+        return email
+
     def save(self, commit=True):
         user = super().save(commit=commit)
         profile = Profile(email=self.cleaned_data['email'], user=user)
+
         if commit:
             profile.save()
+
         return user
 
     class Meta:
@@ -86,9 +96,11 @@ class DeleteProfileForm(forms.ModelForm):
         # Not good
         # should be done with signals
         # because this breaks the abstraction of the auth app
+        user = UserModel.objects.get(id=self.instance.id)
         pets = list(self.instance.pet_set.all())
         Pet.objects.filter(tagged_pets__in=pets).delete()
-        self.instance.delete()
+
+        user.delete()
 
         return self.instance
 

@@ -1,3 +1,7 @@
+.userDetails a {
+    color: initial;
+}
+
 .pet-details {
     margin: 5px 0 5px -1px;
 }

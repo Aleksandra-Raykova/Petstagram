@@ -12,7 +12,7 @@
             <div class="personal">
                 <div class="edit">
                     <p>{{ user.username }}</p>
-                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_authenticated and request.user.id == profile.user.id %}
                         <a href="{% url 'edit-profile' profile.slug %}">
                             <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="edit button">
                         </a>
@@ -22,7 +22,7 @@
                     {% endif %}
                 </div>
                 <div class="data">
-                    <span>{{ photos|length }}</span>
+                    <span>{{ photos_count }}</span>
                     <p>photos</p>
 
                     <span>{{ pets|length }}</span>
@@ -69,12 +69,36 @@
             </div>
         </div>
         <div class="pet-photos">
-            {% for photo in photos %}
-                <a href="{% url 'photo-details' photo.id %}">
-                    <img src="{{ photo.photo_file.url }}"
-                         alt="pet img">
-                </a>
-            {% endfor %}
+            {% if page_obj.object_list %}
+                {% for photo in page_obj.object_list %}
+                    <a href="{% url 'photo-details' photo.id %}">
+                        <img src="{{ photo.photo_file.url }}"
+                             alt="pet img">
+                    </a>
+                {% endfor %}
+
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% else %}
+                <div class="no-posts-holder">
+                    <img class="no-posts" src="{% static 'images/no_posts.png' %}" alt="no posts image">
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

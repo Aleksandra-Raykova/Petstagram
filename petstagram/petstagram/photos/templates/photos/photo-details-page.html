@@ -14,11 +14,20 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>{{ profile.first_name }} {{ profile.last_name }}
+                        <h3>
+                            <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                                {% if photo.created_by_user.get_user_name %}
+                                    {{ photo.created_by_user.get_user_name }}
+                                {% else %}
+                                    {{ photo.created_by_user.user.username }}
+                                {% endif %}
+                            </a>
                             <br>
-                            <span>{{ photo.photo_shooting_location }}</span>
+                            {% if photo.photo_shooting_location %}
+                                <span>{{ photo.photo_shooting_location }}</span>
+                            {% endif %}
                         </h3>
-                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated and request.user.id == profile.user.id %}
                             <div class="edit-delete-btns">
                                 <a href="{% url 'edit-photo' photo.id %}">
                                     <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}"
@@ -122,7 +131,7 @@
                                             {% else %}
                                                 {{ comment.user.user.username }}
                                             {% endif %}
-                                        -
+                                            -
                                         </a>
                                         <br>
                                         <span>{{ comment.created_on }}</span>

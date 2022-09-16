@@ -20,7 +20,7 @@ def show_home_page(request):
             photos = photos.filter(tagged_pets__name__icontains=search_form.cleaned_data['pet_name'])
 
     context = {
-        "all_photos": photos,
+        "all_photos": list(photos)[::-1],
         "comment_form": comment_form,
         "search_form": search_form,
     }
@@ -40,7 +40,7 @@ def add_comment_view(request, photo_pk):
             comment.user = request.user.profile
             comment.save()
 
-        return redirect('home')  # TODO check is can redirect to the same page no matter which one it is
+        return redirect(request.META['HTTP_REFERER'])
 
 
 @login_required

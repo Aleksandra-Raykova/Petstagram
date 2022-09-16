@@ -28,6 +28,19 @@
     font-family: sans-serif;
 }
 
+.no-posts-holder {
+    display: flex;
+    justify-content: center;
+}
+
+.no-posts {
+    width: 70% !important;
+    height: auto !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
 .personal .edit {
     display: flex;
     gap: 20px;
@@ -144,4 +157,19 @@
 
 .pet-photos img:hover {
     box-shadow: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.step-links {
+    text-shadow: 1px 1px #4b4848;
+}
+
+.step-links a:hover {
+    text-shadow: none;
 }

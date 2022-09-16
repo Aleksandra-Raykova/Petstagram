@@ -1,7 +1,7 @@
 {% load static %}
 
 {% for photo in all_photos %}
-    <div class="card" id="{{ photo.id }}">
+    <div class="card">
         <div class="top">
             <div class="userDetails">
                 <a href="{% url 'profile-details' photo.created_by_user.slug %}">
@@ -28,7 +28,7 @@
                 </h3>
             </div>
         </div>
-        <div class="imgBx">
+        <div class="imgBx" id="{{ photo.id }}">
             <img src="{{ photo.photo_file.url }}" alt="post-1" class="cover">
         </div>
         <div class="bottom">

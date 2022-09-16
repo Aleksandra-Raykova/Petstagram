@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from petstagram.accounts.models import Profile
 from petstagram.common.forms import CommentForm
@@ -37,7 +37,7 @@ def show_pet_details(request, user_slug, pet_slug):
     user = UserModel.objects.get(username=user_slug)
     profile = Profile.objects.get(user=user)
     pet = get_pet_object(user_slug, pet_slug)
-    photos = get_list_or_404(Photo, tagged_pets__name=pet.name)
+    photos = list(Photo.objects.filter(tagged_pets__slug=pet.slug))[::-1]
     comment_form = CommentForm()
 
     context = {

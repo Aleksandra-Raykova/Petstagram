@@ -25,13 +25,48 @@ class Profile(models.Model):
 
     GENDERS = [(x, x) for x in (MALE, FEMALE, DO_NOT_SHOW)]
 
-    email = models.EmailField(unique=True)
-    user = models.OneToOneField(to=PetstagramUser, on_delete=models.CASCADE, primary_key=True)
+    email = models.EmailField(
+        unique=True,
+    )
 
-    first_name = models.CharField(max_length=MAX_NAME_LEN, validators=(MinLengthValidator(2),), null=True, blank=True)
-    last_name = models.CharField(max_length=MAX_NAME_LEN, validators=(MinLengthValidator(2),), null=True, blank=True)
-    profile_picture = models.URLField(null=True, blank=True)
-    gender = models.CharField(max_length=11, choices=GENDERS, null=True, blank=True, default=DO_NOT_SHOW)
+    user = models.OneToOneField(
+        to=PetstagramUser,
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
+
+    first_name = models.CharField(
+        max_length=MAX_NAME_LEN,
+        validators=(
+            MinLengthValidator(2),
+        ),
+        null=True,
+        blank=True
+    )
+
+    last_name = models.CharField(
+        max_length=MAX_NAME_LEN,
+        validators=(
+            MinLengthValidator(2),
+        ),
+        null=True,
+        blank=True
+    )
+
+    profile_picture = models.URLField(
+        null=True,
+        blank=True,
+        default="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
+    )
+
+    gender = models.CharField(
+        max_length=11,
+        choices=GENDERS,
+        null=True,
+        blank=True,
+        default=DO_NOT_SHOW
+    )
+
     slug = models.SlugField()
 
     def get_user_name(self):

@@ -8,7 +8,7 @@ from petstagram.accounts.models import PetstagramUser, Profile
 class Pet(models.Model):
     name = models.CharField(
         max_length=20,
-    )  # TODO pet names should be unique per user
+    )
 
     date_of_birth = models.DateField()
 

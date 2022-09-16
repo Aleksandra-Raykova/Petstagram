@@ -9,12 +9,13 @@ from petstagram.photos.models import Photo
 
 @login_required
 def add_photo(request):
-    form = CreatePhotoForm(request.POST or None)
+    form = CreatePhotoForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
-        pet = form.save(commit=False)
-        pet.user_profile = request.user
-        pet.save()
+        photo = form.save(commit=False)
+        photo.created_by_user = request.user.profile
+        photo.save()
+        form.save_m2m()
 
         return redirect('home')
 

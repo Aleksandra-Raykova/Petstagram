@@ -4,10 +4,9 @@
     <div class="edit-delete edit-photo">
         <h2>Add photo</h2>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-
             <button class="add-btn" type="submit">Add Photo</button>
         </form>
     </div>

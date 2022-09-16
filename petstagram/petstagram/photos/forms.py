@@ -4,6 +4,8 @@ from petstagram.photos.models import Photo
 
 
 class CreatePhotoForm(forms.ModelForm):
+    photo_file = forms.FileField()
+
     class Meta:
         model = Photo
         fields = ['photo_file', 'description', 'tagged_pets', 'photo_shooting_location']

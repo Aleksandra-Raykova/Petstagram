@@ -1,5 +1,6 @@
 from django.contrib.auth import views as auth_views, get_user_model
 from django.contrib.auth import mixins
+from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from petstagram.accounts.forms import CreateProfileForm, EditProfileForm, DeleteProfileForm, CustomLoginForm, \
@@ -30,7 +31,7 @@ class UserRegisterView(views.CreateView):
     model = get_user_model()
     form_class = CreateProfileForm
     template_name = 'accounts/register-page.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('login')
 
 
 class UserLoginView(auth_views.LoginView):
@@ -54,6 +55,9 @@ class DeleteProfileView(mixins.LoginRequiredMixin, views.DeleteView):
     template_name = 'accounts/profile-delete-page.html'
     success_url = reverse_lazy('home')
 
+    def post(self, *args, slug):
+        self.request.user.delete()
+
 
 class ProfileDetailsView(views.DetailView):
     model = Profile
@@ -62,7 +66,11 @@ class ProfileDetailsView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pets = list(Pet.objects.filter(user_profile=self.object))
-        photos = Photo.objects.filter(created_by_user=self.object)
+        photos = list(Photo.objects.filter(created_by_user=self.object))[::-1]
+        paginator = Paginator(photos, 10)
+        page_number = self.request.GET.get('page') or 1
+        page_obj = paginator.get_page(page_number)
+        photos_count = len(photos)
         total_likes_count = sum(p.like_set.count() for p in photos)
 
         context.update({
@@ -70,8 +78,9 @@ class ProfileDetailsView(views.DetailView):
             'profile': self.object,
             'is_owner': self.object.user.id == self.request.user.id,
             'total_likes_count': total_likes_count,
+            'photos_count': photos_count,
             'pets': pets,
-            'photos': photos,
+            'page_obj': page_obj,
         })
 
         return context

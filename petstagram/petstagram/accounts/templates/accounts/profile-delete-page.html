@@ -7,7 +7,7 @@
             Are you sure you want to delete your profile?
         </h1>
 
-        <form method="post">
+        <form method="post" action="{% url 'delete-profile' request.user.profile.slug %}">
             {% csrf_token %}
             {{ form }}
             <div class="sure-buttons">
