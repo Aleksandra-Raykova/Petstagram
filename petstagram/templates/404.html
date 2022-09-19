@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static%}
+{% load static %}
 
 {% block content %}
     <div class="not-found-img">
@@ -12,7 +12,8 @@
         </h1>
 
         <h3>Error 404 - page not found.</h3>
-
-        <button>Return to Petstagram</button>
+        <a href="{% url 'home' %}">
+            <button>Return to Petstagram</button>
+        </a>
     </div>
 {% endblock %}
