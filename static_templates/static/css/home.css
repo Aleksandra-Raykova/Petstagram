@@ -11,6 +11,7 @@ body {
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu,
         Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background: #fafafa;
+    min-height: 100vh;
 }
 
 .navbar {
@@ -24,14 +25,22 @@ body {
     border: 1px solid rgb(218, 217, 217);
 }
 
-.navbar .container {
-    /* background-color: #555; */
+.container {
     padding: 15px 0;
     width: 75%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* margin: 0 auto; */
+}
+
+.container a {
+    color: #403e3e;
+}
+
+.errorlist li {
+    width: 200px;
+    color: red;
+    list-style-type: none;
 }
 
 .container .logo {
@@ -45,10 +54,14 @@ body {
     text-align: end;
 }
 
+.searchbar label {
+    display: none;
+}
+
 .searchbar input {
     background-color: #fafafa;
     width: 80%;
-    padding: 5px;
+    padding: 5px 5px 5px 0;
     text-indent: 21px;
     outline: none;
     border: 1px solid rgb(218, 217, 217);
@@ -56,10 +69,19 @@ body {
     color: rgb(77, 77, 77);
 }
 
+.searchbar button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
 .searchbar img {
     position: absolute;
     margin-left: -2.5rem;
-    margin-top: 0.25rem;
+    margin-top: -0.8rem;
 }
 
 .searchbar input::placeholder {
@@ -128,12 +150,12 @@ main .container {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    /* background: #ddd; */
 }
 
 .col-9 {
     width: 65%;
     margin: 5% auto;
+    margin-bottom: -20px;
 }
 
 .col-9 .card {
@@ -184,6 +206,7 @@ main .container {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    margin-top: 0;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -195,6 +218,7 @@ main .container {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    margin-top: 0 !important;
 }
 
 .cover {
@@ -287,9 +311,15 @@ main .container {
     padding: 10px 0;
 }
 
-.addComments a {
+.addComments button {
+    position: absolute;
+    right: 30px;
     color: #1d92ffcb;
     font-weight: 500;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
 }
 
 .addComments .reaction {
@@ -299,8 +329,13 @@ main .container {
     color: rgb(88, 88, 88);
 }
 
-input.text {
-    width: 100%;
+textarea {
+    position: absolute;
+    left: 30px;
+    width: 85%;
+    resize: none;
+    overflow: hidden;
+    height: 20px;
     border: none;
     outline: none;
     font-weight: 400;
@@ -309,8 +344,17 @@ input.text {
     background: none;
 }
 
-input.text::placeholder {
+textarea.text::placeholder {
     color: #777;
+}
+
+.addComments form label {
+    display: none;
+}
+
+.addComments form {
+    display: flex;
+    margin-bottom: 15px;
 }
 
 .postTime {
@@ -356,11 +400,11 @@ a {
     }
 
     .statuses {
-        margin-bottom: 0px;
+        margin-bottom: 0;
     }
 
     .col-9 .card {
-        margin-bottom: 0px;
+        margin-bottom: 0;
         width: 100%;
         border: none;
     }
@@ -374,18 +418,19 @@ a {
 
 }
 
-.container .footer {
+.footer {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.container .footer .footer-section {
+.footer .footer-section {
     position: relative;
     width: 100%;
-    bottom: 0;
     font-size: 12px;
     font-family: sans-serif;
+    z-index: -2;
 }
 
-.container .footer a:hover {
+.footer a:hover {
     color: #ff0000;
 }

@@ -29,14 +29,11 @@
             </div>
         </div>
         <div class="imgBx" id="{{ photo.id }}">
-            <img src="{{ photo.photo_file.url }}" alt="post-1" class="cover">
+            <img src="{{ photo.photo_file.url }}" alt="post" class="cover">
         </div>
         <div class="bottom">
             <div class="actionBtns">
                 <div class="left">
-                    <a>
-
-                    </a>
                     <span class="heart">
                             <span>
                                 <a href="{% url 'like' photo.id %}">

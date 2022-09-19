@@ -4,6 +4,7 @@
 
 .login-register-box, .second-option {
 	display: block;
+	width: 300px;
 	background-color: rgb(255, 255, 255);
 	border: 1px solid rgb(156, 152, 152);
 	padding: 40px;
@@ -18,6 +19,10 @@
 	font-size: 40px;
 	text-align: center;
 	margin-top: -10px;
+}
+
+.login-register-box label {
+	display: none;
 }
 
 .login-register-box input {
