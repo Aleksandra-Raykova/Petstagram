@@ -8,7 +8,10 @@ class CreatePhotoForm(forms.ModelForm):
 
     class Meta:
         model = Photo
-        fields = ['photo_file', 'description', 'tagged_pets', 'photo_shooting_location']
+        fields = ['photo_file', 'description', 'photo_shooting_location', 'tagged_pets']
+        labels = {
+            "photo_shooting_location": "Location"
+        }
 
 
 class EditPhotoForm(CreatePhotoForm):
@@ -21,4 +24,8 @@ class EditPhotoForm(CreatePhotoForm):
                 field.widget.attrs['readonly'] = 'readonly'
 
     class Meta(CreatePhotoForm.Meta):
-        exclude = ('photo',)
+        fields = ['photo_file', 'description', 'photo_shooting_location', 'tagged_pets']
+        labels = {
+            "photo_shooting_location": "Location"
+        }
+

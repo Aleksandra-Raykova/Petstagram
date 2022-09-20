@@ -33,11 +33,15 @@
             </div>
         </div>
         <div class="pet-posts">
-            {% if all_photos %}
-                {% include 'common/pets-posts.html' %}
-            {% else %}
-                <img class="no-posts" src="{% static 'images/no_posts.png' %}" alt="no posts image">
-            {% endif %}
+            <div class="container">
+                <div class="col-9">
+                    {% if all_photos %}
+                        {% include 'common/pets-posts.html' %}
+                    {% else %}
+                        <img class="no-posts" src="{% static 'images/no_posts.png' %}" alt="no posts image">
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
