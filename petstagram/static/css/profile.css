@@ -29,6 +29,10 @@
     font-family: sans-serif;
 }
 
+.delete {
+    display: block;
+}
+
 .no-posts-holder {
     display: flex;
     justify-content: center;
