@@ -19,7 +19,7 @@ def edit_profile_view(request, pk):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            return redirect(to='home')
+            return redirect(to='profile-details', pk=pk)
     else:
         user_form = EditUserForm(instance=request.user)
         profile_form = EditProfileForm(instance=Profile.objects.get(user=request.user))
@@ -67,7 +67,7 @@ class ProfileDetailsView(views.DetailView):
         context = super().get_context_data(**kwargs)
         pets = list(Pet.objects.filter(user_profile=self.object))
         photos = list(Photo.objects.filter(created_by_user=self.object))[::-1]
-        paginator = Paginator(photos, 10)
+        paginator = Paginator(photos, 2)
         page_number = self.request.GET.get('page') or 1
         page_obj = paginator.get_page(page_number)
         photos_count = len(photos)

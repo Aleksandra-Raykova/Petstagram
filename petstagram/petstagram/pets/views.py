@@ -26,7 +26,7 @@ def add_pet(request):
         pet.user_profile = user
         pet.save()
 
-        return redirect('home')
+        return redirect('profile-details', pk=request.user.pk)
 
     context = {"form": form}
 
@@ -74,7 +74,7 @@ def delete_pet(request, username, pet_slug):
 
     if request.method == 'POST':
         pet.delete()
-        return redirect('home')
+        return redirect('profile-details', pk=request.user.pk)
 
     form = DeletePetForm(instance=pet)
     context = {'form': form}

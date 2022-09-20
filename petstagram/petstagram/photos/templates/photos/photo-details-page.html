@@ -103,7 +103,7 @@
                     </div>
                     <p class="likes">{{ photo.like_set.count }} likes</p>
                     {% for tagged_pet in photo.tagged_pets.all %}
-                        <a href="{% url 'pet-details' tagged_pet.user_profile.slug tagged_pet.slug %}">
+                        <a href="{% url 'pet-details' tagged_pet.user_profile.pk tagged_pet.slug %}">
                             <p class="message">
                                 <b>{{ tagged_pet }}</b>
                             </p>

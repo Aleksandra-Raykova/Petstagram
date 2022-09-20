@@ -56,7 +56,6 @@ class Profile(models.Model):
     profile_picture = models.URLField(
         null=True,
         blank=True,
-        default="https://cdn-icons-png.flaticon.com/512/1077/1077114.png"
     )
 
     gender = models.CharField(
@@ -66,8 +65,6 @@ class Profile(models.Model):
         blank=True,
         default=DO_NOT_SHOW
     )
-
-    slug = models.SlugField()
 
     def get_user_name(self):
         name = None
@@ -81,11 +78,6 @@ class Profile(models.Model):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         ...
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.user.username)
-        return super().save(*args, **kwargs)
 
     def __str__(self):
         user_info = '%s %s' % (self.user.username, self.get_user_name())
