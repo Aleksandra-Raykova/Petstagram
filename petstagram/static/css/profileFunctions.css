@@ -144,7 +144,6 @@ label {
 .edit-photo input, select, .edit-photo textarea, .label-input input {
     width: 300px !important;
 }
-
 .label-input {
     display: flex;
     margin-top: -10px;

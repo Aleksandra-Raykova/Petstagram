@@ -10,8 +10,12 @@
                         <div class="profilepic">
                             <div class="profile_img">
                                 <div class="image">
-                                    <img src="{{ profile.profile_picture }}" alt="img8">
-                                </div>
+                                {% if profile.created_by_user.profile_picture %}
+                                    <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                                {% else %}
+                                    <img src="{% static 'images/person.png' %}">
+                                {% endif %}
+                            </div>
                             </div>
                         </div>
                         <h3>

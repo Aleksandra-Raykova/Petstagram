@@ -137,6 +137,13 @@
     max-height: 540px;
 }
 
+label {
+    width: 100px;
+}
+
+.edit-photo input, select, .edit-photo textarea, .label-input input {
+    width: 300px !important;
+}
 .label-input {
     display: flex;
     margin-top: -10px;
@@ -151,4 +158,8 @@
     width: 40%;
     margin-top: 12px;
     text-align: left;
+}
+
+#id_tagged_pets {
+    height: 82px;
 }
