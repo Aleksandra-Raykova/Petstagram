@@ -4,7 +4,7 @@
     <div class="card">
         <div class="top">
             <div class="userDetails">
-                <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                <a href="{% url 'profile-details' photo.created_by_user.pk %}">
                     <div class="profilepic">
                         <div class="profile_img">
                             <div class="image">
@@ -14,7 +14,7 @@
                     </div>
                 </a>
                 <h3>
-                    <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                    <a href="{% url 'profile-details' photo.created_by_user.pk %}">
                         {% if photo.created_by_user.get_user_name %}
                             {{ photo.created_by_user.get_user_name }}
                         {% else %}
@@ -85,7 +85,7 @@
             </div>
             <p class="likes">{{ photo.like_set.count }} likes</p>
             {% for tagged_pet in photo.tagged_pets.all %}
-                <a href="{% url 'pet-details' tagged_pet.user_profile.slug tagged_pet.slug %}">
+                <a href="{% url 'pet-details' tagged_pet.user_profile.user.username tagged_pet.slug %}">
                     <p class="message">
                         <b>{{ tagged_pet }}</b>
                     </p>

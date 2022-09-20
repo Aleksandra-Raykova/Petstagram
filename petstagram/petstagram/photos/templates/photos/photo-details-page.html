@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <h3>
-                            <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                            <a href="{% url 'profile-details' photo.created_by_user.pk %}">
                                 {% if photo.created_by_user.get_user_name %}
                                     {{ photo.created_by_user.get_user_name }}
                                 {% else %}
@@ -115,7 +115,7 @@
                         <div class="comments">
                             <div class="top">
                                 <div class="userDetails">
-                                    <a href="{% url 'profile-details' photo.created_by_user.slug %}">
+                                    <a href="{% url 'profile-details' photo.created_by_user.pk %}">
                                         <div class="profilepic">
                                             <div class="profile_img">
                                                 <div class="image">
@@ -125,7 +125,7 @@
                                         </div>
                                     </a>
                                     <h3>
-                                        <a href="{% url 'profile-details' comment.user.slug %}">
+                                        <a href="{% url 'profile-details' comment.user.pk %}">
                                             {% if comment.user.get_user_name %}
                                                 {{ comment.user.get_user_name }}
                                             {% else %}

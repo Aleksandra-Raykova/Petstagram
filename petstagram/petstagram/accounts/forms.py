@@ -70,6 +70,7 @@ class EditUserForm(forms.ModelForm):
     class Meta:
         model = UserModel
         fields = ['username']
+        labels = {"first_name": "First Name", "last_name": "Last Name"}
 
 
 class EditProfileForm(forms.ModelForm):

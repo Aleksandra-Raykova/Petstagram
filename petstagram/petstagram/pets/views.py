@@ -13,7 +13,7 @@ UserModel = get_user_model()
 
 
 def get_pet_object(user, pet):
-    return get_object_or_404(Pet, slug=pet, user_profile__slug=user)
+    return get_object_or_404(Pet, slug=pet, user_profile__user__username=user)
 
 
 @login_required
@@ -33,10 +33,10 @@ def add_pet(request):
     return render(request=request, template_name='pets/pet-add-page.html', context=context)
 
 
-def show_pet_details(request, user_slug, pet_slug):
-    user = UserModel.objects.get(username=user_slug)
+def show_pet_details(request, username, pet_slug):
+    user = UserModel.objects.get(username=username)
     profile = Profile.objects.get(user=user)
-    pet = get_pet_object(user_slug, pet_slug)
+    pet = get_pet_object(username, pet_slug)
     photos = list(Photo.objects.filter(tagged_pets__slug=pet.slug))[::-1]
     comment_form = CommentForm()
 
@@ -51,8 +51,8 @@ def show_pet_details(request, user_slug, pet_slug):
 
 
 @login_required
-def edit_pet(request, user_slug, pet_slug):
-    pet = get_pet_object(user_slug, pet_slug)
+def edit_pet(request, username, pet_slug):
+    pet = get_pet_object(username, pet_slug)
 
     if request.method == "GET":
         form = PetForm(initial=pet.__dict__)
@@ -61,7 +61,7 @@ def edit_pet(request, user_slug, pet_slug):
 
         if form.is_valid():
             form.save()
-            return redirect('pet-details', user_slug, pet_slug)
+            return redirect('pet-details', username, pet_slug)
 
     context = {'form': form}
 
@@ -69,8 +69,8 @@ def edit_pet(request, user_slug, pet_slug):
 
 
 @login_required
-def delete_pet(request, user_slug, pet_slug):
-    pet = get_pet_object(user_slug, pet_slug)
+def delete_pet(request, username, pet_slug):
+    pet = get_pet_object(username, pet_slug)
 
     if request.method == 'POST':
         pet.delete()

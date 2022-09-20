@@ -11,7 +11,7 @@ from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
 
 
-def edit_profile_view(request, slug):
+def edit_profile_view(request, pk):
     if request.method == 'POST':
         user_form = EditUserForm(request.POST, instance=request.user)
         profile_form = EditProfileForm(request.POST, request.FILES, instance=Profile.objects.get(user=request.user))
