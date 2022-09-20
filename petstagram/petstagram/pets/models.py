@@ -7,10 +7,13 @@ from petstagram.accounts.models import PetstagramUser, Profile
 
 class Pet(models.Model):
     name = models.CharField(
-        max_length=20,
+        max_length=30,
     )
 
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(
+        null=True,
+        blank=True,
+    )
 
     pet_photo = models.URLField()
 
