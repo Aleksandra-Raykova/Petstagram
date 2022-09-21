@@ -19,6 +19,7 @@ def edit_profile_view(request, pk):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+
             return redirect(to='profile-details', pk=pk)
     else:
         user_form = EditUserForm(instance=request.user)

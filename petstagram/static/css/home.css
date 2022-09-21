@@ -14,6 +14,10 @@ body {
     min-height: 100vh;
 }
 
+.error {
+    color: red;
+}
+
 .navbar {
     position: fixed;
     z-index: 100000;

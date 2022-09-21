@@ -86,6 +86,22 @@ class EditProfileForm(forms.ModelForm):
         self.fields['profile_picture'].required = False
         self.fields['gender'].required = False
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+
+        if not first_name.isalpha():
+            raise forms.ValidationError('First name can only contain letters.')
+
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+
+        if not last_name.isalpha():
+            raise forms.ValidationError('Last name can only contain letters.')
+
+        return last_name
+
     class Meta:
         model = Profile
         exclude = ('slug', 'user', 'date_of_birth')

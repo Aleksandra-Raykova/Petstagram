@@ -7,8 +7,16 @@
 
         <form method="post">
             {% csrf_token %}
-            {{ user_form.errors }}
-            {{ form.errors }}
+            {% for field in user_form %}
+                {% for error in field.errors %}
+                    <p class="error"> {{ error }} </p>
+                {% endfor %}
+            {% endfor %}
+            {% for field in profile_form %}
+                {% for error in field.errors %}
+                    <p class="error"> {{ error }} </p>
+                {% endfor %}
+            {% endfor %}
             <div class="label-input">
                 <label for="first name">Username: </label>
                 {{ user_form.username }}
