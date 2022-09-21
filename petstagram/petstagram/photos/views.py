@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from petstagram.accounts.models import Profile
 from petstagram.common.forms import CommentForm
+from petstagram.common.views import get_photos_likes_info
 from petstagram.photos.forms import CreatePhotoForm, EditPhotoForm
 from petstagram.photos.models import Photo
 
@@ -36,7 +37,8 @@ def show_photo_details(request, pk):
         "photo": photo,
         "total_likes_count": total_likes_count,
         "comments": comments,
-        "comment_form": comment_form
+        "comment_form": comment_form,
+        "photos_likes_info": get_photos_likes_info(request, [photo]),
     }
 
     return render(request=request, template_name='photos/photo-details-page.html', context=context)

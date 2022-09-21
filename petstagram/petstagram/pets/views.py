@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from petstagram.accounts.models import Profile
 from petstagram.common.forms import CommentForm
+from petstagram.common.views import get_photos_likes_info
 from petstagram.pets.forms import PetForm, DeletePetForm
 from petstagram.pets.models import Pet
 from petstagram.photos.models import Photo
@@ -45,6 +46,7 @@ def show_pet_details(request, username, pet_slug):
         "pet": pet,
         "all_photos": photos,
         "comment_form": comment_form,
+        "photos_likes_info": get_photos_likes_info(request, photos),
     }
 
     return render(request=request, template_name='pets/pet-details-page.html', context=context)

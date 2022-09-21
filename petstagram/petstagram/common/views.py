@@ -8,6 +8,16 @@ from petstagram.photos.models import Photo
 from pyperclip import copy
 
 
+def get_photos_likes_info(request, photos):
+    photos_likes_info = []
+
+    for photo in photos:
+        if photo.like_set.filter(user_id=request.user.id).first():
+            photos_likes_info.append(photo.id)
+
+    return photos_likes_info
+
+
 def show_home_page(request):
     photos = Photo.objects.all()
     comment_form = CommentForm()
@@ -23,6 +33,7 @@ def show_home_page(request):
         "all_photos": list(photos)[::-1],
         "comment_form": comment_form,
         "search_form": search_form,
+        "photos_likes_info": get_photos_likes_info(request, photos),
     }
 
     return render(request=request, template_name='common/home-page.html', context=context)
