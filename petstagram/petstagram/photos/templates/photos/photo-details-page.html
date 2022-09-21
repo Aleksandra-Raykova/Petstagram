@@ -10,12 +10,12 @@
                         <div class="profilepic">
                             <div class="profile_img">
                                 <div class="image">
-                                {% if profile.created_by_user.profile_picture %}
-                                    <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
-                                {% else %}
-                                    <img src="{% static 'images/person.png' %}">
-                                {% endif %}
-                            </div>
+                                    {% if profile.created_by_user.profile_picture %}
+                                        <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                                    {% else %}
+                                        <img src="{% static 'images/person.png' %}">
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                         <h3>
@@ -119,30 +119,30 @@
                         <div class="comments">
                             <div class="top">
                                 <div class="userDetails">
-                                    <a href="{% url 'profile-details' photo.created_by_user.pk %}">
-                                        <div class="profilepic">
-                                            <div class="profile_img">
-                                                <div class="image">
-                                                    <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                                    <div class="comment-data">
+                                        <a href="{% url 'profile-details' photo.created_by_user.pk %}">
+                                            <div class="profilepic">
+                                                <div class="profile_img">
+                                                    <div class="image">
+                                                        <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                    <h3>
-                                        <a href="{% url 'profile-details' comment.user.pk %}">
-                                            {% if comment.user.get_user_name %}
-                                                {{ comment.user.get_user_name }}
-                                            {% else %}
-                                                {{ comment.user.user.username }}
-                                            {% endif %}
-                                            -
                                         </a>
-                                        <br>
-                                        <span>{{ comment.created_on }}</span>
-                                    </h3>
+                                        <p>
+                                            <a href="{% url 'profile-details' comment.user.pk %}">
+                                                {% if comment.user.get_user_name %}
+                                                    {{ comment.user.get_user_name }}
+                                                {% else %}
+                                                    {{ comment.user.user.username }}
+                                                {% endif %}
+                                            </a>
+                                            - {{ comment.body }}
+                                        </p>
+                                    </div>
+                                <span>{{ comment.created_on }}</span>
                                 </div>
                             </div>
-                            <p>{{ comment.body }}</p>
                         </div>
                     {% endfor %}
                     <div class="add-comment-details">
