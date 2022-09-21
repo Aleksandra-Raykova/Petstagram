@@ -33,6 +33,8 @@ class Photo(models.Model):
     tagged_pets = models.ManyToManyField(
         verbose_name="Tag Pets",
         to=Pet,
+        null=True,
+        blank=True,
     )
 
     created_by_user = models.ForeignKey(
