@@ -1,3 +1,8 @@
+.pet-profile {
+    width: 50%;
+    margin-bottom: 20px;
+}
+
 .pet-profile .profile-data {
     gap: 50px;
     margin-bottom: 20px;
@@ -15,6 +20,7 @@
 .pet-posts {
     display: flex;
     justify-content: center;
+    width: 100%;
     border-top: 1px solid #ddd;
     flex-wrap: wrap;
 }
@@ -22,7 +28,7 @@
 .pet-posts .card {
     margin-top: 20px;
     position: relative;
-    width: 700px;
+    width: 100%;
     display: inline-block;
     border: 1px solid rgba(7, 7, 7, 0.24);
     flex-basis: 100%;
