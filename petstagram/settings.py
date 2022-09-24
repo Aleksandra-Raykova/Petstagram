@@ -1,3 +1,7 @@
+import os
+import cloudinary
+import decouple
+
 from pathlib import Path
 from os import path
 
@@ -26,13 +30,13 @@ MY_APPS = [
 ]
 
 INSTALLED_APPS = [
-    'easy_maps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary'
 ] + MY_APPS
 
 MIDDLEWARE = [
@@ -68,12 +72,24 @@ WSGI_APPLICATION = 'petstagram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'mydatabase',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('POSTGRES_NAME', decouple.config('POSTGRES_NAME')),
+            'USER': os.getenv('POSTGRES_USER', decouple.config('POSTGRES_USER')),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD', decouple.config('POSTGRES_PASSWORD')),
+            'HOST': os.getenv('POSTGRES_HOST', decouple.config('POSTGRES_HOST')),
+            'PORT': '5432',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -113,6 +129,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = path.join(BASE_DIR, 'media')
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUD_NAME', decouple.config('CLOUD_NAME')),
+    'API_KEY': os.getenv('API_KEY', decouple.config('API_KEY')),
+    'API_SECRET': os.getenv('API_SECRET', decouple.config('API_SECRET'))
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -124,5 +146,5 @@ LOGOUT_REDIRECT_URL = 'login'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'no.reply.petstagram@gmail.com'
-EMAIL_HOST_PASSWORD = 'gqhidvelyurwgawt'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', decouple.config('EMAIL_HOST_PASSWORD'))
 EMAIL_PORT = 587
