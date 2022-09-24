@@ -6,8 +6,8 @@
         <div class="profile-data">
             <div class="profile_img">
                 <div class="image">
-                    {% if profile.created_by_user.profile_picture %}
-                        <img src="{{ photo.created_by_user.profile_picture }}" alt="img8">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture }}" alt="img8">
                     {% else %}
                         <img src="https://res.cloudinary.com/dkzzzg8gy/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1664009722/images/person_mm5kb3.jpg">
                     {% endif %}
