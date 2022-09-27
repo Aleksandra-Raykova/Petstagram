@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, resolve_url
-from django.urls import reverse
 
 from petstagram.common.forms import CommentForm, SearchForm
 from petstagram.common.models import Like
 from petstagram.photos.models import Photo
 
-from pyperclip import copy
+from clipboard import copy
 
 
 def get_photos_likes_info(request, photos):
@@ -70,6 +69,6 @@ def like_functionality(request, photo_pk):
 
 
 def copy_link_to_clipboard(request, photo_pk):
-    copy(resolve_url('photo-details', photo_pk))
+    copy(request.META['HTTP_HOST'] + resolve_url('photo-details', photo_pk))
 
     return redirect(request.META['HTTP_REFERER'] + f'#{photo_pk}')
