@@ -70,6 +70,6 @@ def like_functionality(request, photo_pk):
 
 
 def copy_link_to_clipboard(request, photo_pk):
-    copy(str(request.META['HTTP_HOST'] + resolve_url('photo-details', photo_pk)))
+    copy(resolve_url('photo-details', photo_pk))
 
     return redirect(request.META['HTTP_REFERER'] + f'#{photo_pk}')
