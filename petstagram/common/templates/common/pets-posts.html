@@ -84,7 +84,7 @@
                                 </a>
                             </span>
                         </span>
-                    <a href="{% url 'share' photo.id %}">
+                    <a onclick="copyToClipboard({{ photo.id }})" href="{% url 'share' photo.id %}">
                         <svg aria-label="Share Post"
                              class="_8-yf5 "
                              color="#262626"
