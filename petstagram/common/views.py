@@ -5,7 +5,8 @@ from petstagram.common.forms import CommentForm, SearchForm
 from petstagram.common.models import Like
 from petstagram.photos.models import Photo
 
-from clipboard import copy
+from pyperclip import copy
+from subprocess import Popen, PIPE
 
 
 def get_photos_likes_info(request, photos):
@@ -69,6 +70,10 @@ def like_functionality(request, photo_pk):
 
 
 def copy_link_to_clipboard(request, photo_pk):
-    copy(request.META['HTTP_HOST'] + resolve_url('photo-details', photo_pk))
+    try:
+        copy(request.META['HTTP_HOST'] + resolve_url('photo-details', photo_pk))
+    except:
+        with Popen(['xclip', '-selection', 'clipboard'], stdin=PIPE) as pipe:
+            pipe.communicate(input=request.META['HTTP_HOST'] + resolve_url('photo-details', photo_pk))
 
     return redirect(request.META['HTTP_REFERER'] + f'#{photo_pk}')
