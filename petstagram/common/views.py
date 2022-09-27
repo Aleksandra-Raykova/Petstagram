@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
+from django.urls import reverse
 
 from petstagram.common.forms import CommentForm, SearchForm
 from petstagram.common.models import Like
@@ -69,9 +70,6 @@ def like_functionality(request, photo_pk):
 
 
 def copy_link_to_clipboard(request, photo_pk):
-    if "#" in str(request.META['HTTP_REFERER']):
-        copy(request.META['HTTP_REFERER'])
-    else:
-        copy(request.META['HTTP_REFERER'] + f'#{photo_pk}')
+    copy(request.META['HTTP_HOST'] + resolve_url('photo-details', photo_pk))
 
     return redirect(request.META['HTTP_REFERER'] + f'#{photo_pk}')
