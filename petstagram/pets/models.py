@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -24,15 +23,11 @@ class Pet(models.Model):
         on_delete=models.CASCADE
     )
 
-    def clean(self):
-        name = self.name
-
-        if name in [pet.name for pet in Pet.objects.filter(name=name).exclude(pk=self.pk)]:
-            raise ValidationError('You already have a pet with this name')
-
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(f"{self.name}-{self.id}")
 
         return super().save(*args, **kwargs)
 

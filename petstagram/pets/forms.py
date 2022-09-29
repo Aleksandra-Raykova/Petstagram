@@ -18,7 +18,6 @@ class PetForm(forms.ModelForm):
             'pet_photo': forms.TextInput(attrs={'placeholder': 'Link to image'}),
         }
 
-
 class DeletePetForm(PetForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
