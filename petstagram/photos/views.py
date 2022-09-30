@@ -49,7 +49,7 @@ def edit_photo(request, pk):
     photo = get_object_or_404(Photo, pk=pk)
 
     if request.method == "GET":
-        form = EditPhotoForm(initial=photo.__dict__)
+        form = EditPhotoForm(instance=photo, initial=photo.__dict__)
     else:
         form = EditPhotoForm(request.POST, instance=photo)
 

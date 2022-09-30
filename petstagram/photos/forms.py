@@ -14,7 +14,7 @@ class CreatePhotoForm(forms.ModelForm):
         }
 
 
-class EditPhotoForm(CreatePhotoForm):
+class EditPhotoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -23,8 +23,9 @@ class EditPhotoForm(CreatePhotoForm):
                 field.widget.attrs['disabled'] = 'disabled'
                 field.widget.attrs['readonly'] = 'readonly'
 
-    class Meta(CreatePhotoForm.Meta):
-        fields = ['photo_file', 'description', 'photo_shooting_location', 'tagged_pets']
+    class Meta:
+        model = Photo
+        fields = ['description', 'photo_shooting_location', 'tagged_pets']
         labels = {
             "photo_shooting_location": "Location"
         }
