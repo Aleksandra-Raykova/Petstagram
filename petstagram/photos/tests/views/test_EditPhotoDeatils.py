@@ -1,8 +1,6 @@
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 
 from petstagram.common.mixins.SetUp_mixin import SetUpMixin
-from petstagram.photos.models import Photo
 
 
 class EditPhotoViewTests(SetUpMixin):

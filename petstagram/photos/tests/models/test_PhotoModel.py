@@ -11,7 +11,7 @@ class PhotoModelTests(SetUpMixin):
         photo.created_by_user = self.profile
         photo.photo_file = SimpleUploadedFile(
             name='test_image.jpg',
-            content=open('./petstagram/photos/tests/models/images/dambo.jpg', 'rb').read(),
+            content=open('./petstagram/photos/tests/images/dambo.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
 
@@ -29,7 +29,7 @@ class PhotoModelTests(SetUpMixin):
         photo.created_by_user = self.profile
         photo.photo_file = SimpleUploadedFile(
             name='test_image.jpg',
-            content=open('./petstagram/photos/tests/models/images/6MB.jpg', 'rb').read(),
+            content=open('./petstagram/photos/tests/images/6MB.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
 
@@ -45,7 +45,7 @@ class PhotoModelTests(SetUpMixin):
         photo.description = 'd' * 9
         photo.photo_file = SimpleUploadedFile(
             name='test_image.jpg',
-            content=open('./petstagram/photos/tests/models/images/dambo.jpg', 'rb').read(),
+            content=open('./petstagram/photos/tests/images/dambo.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
 

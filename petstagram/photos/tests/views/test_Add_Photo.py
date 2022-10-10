@@ -23,7 +23,7 @@ class AddPhotoViewTests(SetUpMixin):
 
         photo_file = SimpleUploadedFile(
             name='test_image.jpg',
-            content=open('./petstagram/photos/tests/models/images/dambo.jpg', 'rb').read(),
+            content=open('./petstagram/photos/tests/images/dambo.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
 
@@ -37,7 +37,7 @@ class AddPhotoViewTests(SetUpMixin):
 
         photo_file = SimpleUploadedFile(
             name='test_image.jpg',
-            content=open('./petstagram/photos/tests/models/images/dambo.jpg', 'rb').read(),
+            content=open('./petstagram/photos/tests/images/dambo.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
 

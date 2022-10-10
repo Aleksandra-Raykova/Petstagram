@@ -40,7 +40,7 @@ class SetUpMixin(TestCase):
         self.photo = Photo(
             photo_file=SimpleUploadedFile(
                 name='test_image.jpg',
-                content=open('./petstagram/photos/tests/models/images/dambo.jpg', 'rb').read(),
+                content=open('./petstagram/photos/tests/images/dambo.jpg', 'rb').read(),
                 content_type='image/jpeg'
             ),
             created_by_user=self.profile
