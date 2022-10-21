@@ -12,9 +12,11 @@ from petstagram.photos.models import Photo
 
 
 def edit_profile_view(request, pk):
+    current_user = request.user
+    current_profile = Profile.objects.get(user=current_user)
     if request.method == 'POST':
         user_form = EditUserForm(request.POST, instance=request.user)
-        profile_form = EditProfileForm(request.POST, request.FILES, instance=Profile.objects.get(user=request.user))
+        profile_form = EditProfileForm(request.POST, request.FILES, instance=current_profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -22,8 +24,8 @@ def edit_profile_view(request, pk):
 
             return redirect(to='profile-details', pk=pk)
     else:
-        user_form = EditUserForm(instance=request.user)
-        profile_form = EditProfileForm(instance=Profile.objects.get(user=request.user))
+        user_form = EditUserForm(instance=current_user)
+        profile_form = EditProfileForm(instance=current_profile)
 
     return render(request, 'accounts/profile-edit-page.html', {'user_form': user_form, 'profile_form': profile_form})
 

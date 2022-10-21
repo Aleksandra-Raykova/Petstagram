@@ -7,59 +7,39 @@
 
         <form method="post">
             {% csrf_token %}
-            {% for field in user_form %}
-                {% for error in field.errors %}
-                    <p class="error"> {{ error }} </p>
-                {% endfor %}
-            {% endfor %}
-            {% for field in profile_form %}
-                {% for error in field.errors %}
-                    <p class="error"> {{ error }} </p>
-                {% endfor %}
-            {% endfor %}
+
+            <p class="error"> {{ user_form.username.errors }} </p>
             <div class="label-input">
                 <label for="first name">Username: </label>
                 {{ user_form.username }}
             </div>
             <br>
-            <div class="label-input">
-                <label for="first name">First Name: </label>
-                {{ profile_form.first_name }}
-            </div>
-            <br>
-            <div class="label-input">
-                <label for="last name">Last Name: </label>
-                {{ profile_form.last_name }}
-            </div>
-            <br>
-            <div class="label-input">
-                <label for="email">Email: </label>
-                {{ profile_form.email }}
-            </div>
-            <br>
-            <div class="label-input">
-                <label for="image">Image: </label>
-                {{ profile_form.profile_picture }}
-            </div>
-            <br>
 
-            <div class="label-input">
-                <label for="image">Gender: </label>
-                <div class="list-choice">
-                    <div class="list-choice-title">Gender</div>
-                    <div class="list-choice-objects">
-                        {% for type, value in profile_form.fields.gender.choices %}
-                            <label>
-                                <input type="radio" value="{{ value }}" name="gender"
-                                        {% if profile_form.gender.value == value %}
-                                            checked
-                                        {% endif %}/>
-                                <span>{{ value }}</span>
-                            </label>
-                        {% endfor %}
-                    </div>
+            {% for field in profile_form %}
+                <p class="error"> {{ field.errors }} </p>
+                <div class="label-input">
+                    <label> {{ field.label }}: </label>
+                    {% if field.label != "Gender" %}
+                        {{ field }}
+                    {% else %}
+                        <div class="list-choice">
+                            <div class="list-choice-title">Gender</div>
+                            <div class="list-choice-objects">
+                                {% for value in field %}
+                                    <label>
+                                        <input type="radio" value="{{ value.choice_label }}" name="gender"
+                                                {% if value.choice_label == value %}
+                                               checked
+                                                {% endif %}/>
+                                        <span>{{ value.choice_label }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
-            </div>
+                <br>
+            {% endfor %}
 
             <button class="edit-btn" type="submit">Edit</button>
         </form>

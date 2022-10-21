@@ -74,37 +74,10 @@ class EditUserForm(forms.ModelForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=Profile.MAX_NAME_LEN)
-    last_name = forms.CharField(max_length=Profile.MAX_NAME_LEN)
-    profile_picture = forms.URLField()
-    gender = forms.ChoiceField(choices=Profile.GENDERS, widget=forms.RadioSelect)
-
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].required = False
-        self.fields['last_name'].required = False
-        self.fields['profile_picture'].required = False
-        self.fields['gender'].required = False
-
-    def clean_first_name(self):
-        first_name = self.cleaned_data['first_name']
-
-        if not first_name.isalpha():
-            raise forms.ValidationError('First name can only contain letters.')
-
-        return first_name
-
-    def clean_last_name(self):
-        last_name = self.cleaned_data['last_name']
-
-        if not last_name.isalpha():
-            raise forms.ValidationError('Last name can only contain letters.')
-
-        return last_name
-
     class Meta:
         model = Profile
-        exclude = ('slug', 'user', 'date_of_birth')
+        fields = ['first_name', 'last_name', 'email', 'profile_picture', 'gender']
+        labels = {"first_name": "First Name", 'last_name': "Last Name", "profile_picture": "Image"}
 
 
 class DeleteProfileForm(forms.ModelForm):
