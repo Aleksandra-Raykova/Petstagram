@@ -14,7 +14,7 @@ class Comment(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.body[:10], self.user.get_user_name())
+        return 'by {}'.format(self.user.get_user_name())
 
 
 class Like(models.Model):
