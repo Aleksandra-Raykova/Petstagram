@@ -15,6 +15,9 @@ class PetstagramUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin)
 
     objects = PetstagramUserManager()
 
+    def __str__(self):
+        return self.username
+
 
 class Profile(models.Model):
     MAX_NAME_LEN = 25
